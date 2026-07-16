@@ -1,0 +1,160 @@
+{% load static %}
+
+<article class="luxury-product-card">
+
+    <div class="product-img-wrap">
+
+        <a href="{% url 'products:product_detail' product.slug %}">
+            {% with image=product.images.first %}
+                {% if image %}
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.alt_text|default:product.name }}"
+                    >
+                {% else %}
+                    <img
+                        src="{% static 'images/products/product-01.jpg' %}"
+                        alt="{{ product.name }}"
+                    >
+                {% endif %}
+            {% endwith %}
+        </a>
+
+        <form
+    class="wishlist-form"
+    action="{% url 'products:toggle_wishlist' product.id %}"
+    method="post"
+>
+    {% csrf_token %}
+
+    <input
+        type="hidden"
+        name="next"
+        value="{{ request.get_full_path }}"
+    >
+
+    <button
+    class="
+        wishlist-btn
+        {% if product.id in wishlist_ids %}
+            active
+        {% endif %}
+    "
+    type="submit"
+    aria-label="
+        {% if product.id in wishlist_ids %}
+            ลบ {{ product.name }} ออกจากรายการโปรด
+        {% else %}
+            เพิ่ม {{ product.name }} ในรายการโปรด
+        {% endif %}
+    "
+    title="
+        {% if product.id in wishlist_ids %}
+            ลบออกจากรายการโปรด
+        {% else %}
+            เพิ่มในรายการโปรด
+        {% endif %}
+    "
+>
+    <svg
+        class="wishlist-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+    >
+        <path
+            d="
+                M20.8 4.6
+                a5.5 5.5 0 0 0-7.8 0
+                L12 5.7
+                l-1.1-1.1
+                a5.5 5.5 0 0 0-7.8 7.8
+                L12 21
+                l8.8-8.6
+                a5.5 5.5 0 0 0 0-7.8
+                Z
+            "
+        />
+    </svg>
+</button>
+
+</form>
+    </div>
+
+    <div class="product-info">
+
+        <p class="product-category">
+            {{ product.category.name }}
+        </p>
+
+        <h3 class="product-name">
+            <a href="{% url 'products:product_detail' product.slug %}">
+                {{ product.name }}
+            </a>
+        </h3>
+
+        <p class="product-description">
+            {{ product.short_description|truncatechars:100 }}
+        </p>
+
+        <div class="product-price">
+
+            {% if product.discount_price %}
+                <span class="original-price">
+                    ฿{{ product.price|floatformat:0 }}
+                </span>
+
+                <strong class="sale-price">
+                    ฿{{ product.discount_price|floatformat:0 }}
+                </strong>
+            {% else %}
+                <strong class="regular-price">
+                    ฿{{ product.price|floatformat:0 }}
+                </strong>
+            {% endif %}
+
+        </div>
+
+        {% if product.stock > 0 %}
+
+    <form
+        action="{% url 'products:cart_add' product.id %}"
+        method="post"
+        class="product-card-cart-form"
+    >
+        {% csrf_token %}
+
+        <input
+            type="hidden"
+            name="quantity"
+            value="1"
+        >
+
+        <input
+            type="hidden"
+            name="next"
+            value="{{ request.get_full_path }}"
+        >
+
+        <button
+            class="add-cart-btn"
+            type="submit"
+        >
+            เพิ่มลงตะกร้า
+        </button>
+    </form>
+
+{% else %}
+
+    <button
+        class="add-cart-btn"
+        type="button"
+        disabled
+    >
+        สินค้าหมด
+    </button>
+
+{% endif %}
+
+    </div>
+
+</article>

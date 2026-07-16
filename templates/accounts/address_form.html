@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ page_title }} | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+<section class="customer-dashboard">
+    <div class="container">
+
+        <div class="dashboard-heading">
+            <div>
+                <h1 class="dashboard-title">
+                    {{ page_title }}
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    กรอกข้อมูลที่อยู่สำหรับการจัดส่งสินค้า
+                </p>
+            </div>
+
+            <a
+                href="{% url 'accounts:address_list' %}"
+                class="address-back-link"
+            >
+                ← กลับไปหน้าที่อยู่
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+
+                <section class="dashboard-card address-form-card">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="address-form-alert">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="row g-4">
+
+                            <div class="col-12 col-md-6">
+                                <label
+                                    for="{{ form.recipient_name.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.recipient_name.label }}
+                                    <span aria-hidden="true">*</span>
+                                </label>
+
+                                {{ form.recipient_name }}
+
+                                {% for error in form.recipient_name.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label
+                                    for="{{ form.phone.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.phone.label }}
+                                    <span aria-hidden="true">*</span>
+                                </label>
+
+                                {{ form.phone }}
+
+                                {% for error in form.phone.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12">
+                                <label
+                                    for="{{ form.address_line.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.address_line.label }}
+                                    <span aria-hidden="true">*</span>
+                                </label>
+
+                                {{ form.address_line }}
+
+                                {% for error in form.address_line.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label
+                                    for="{{ form.subdistrict.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.subdistrict.label }}
+                                </label>
+
+                                {{ form.subdistrict }}
+
+                                {% for error in form.subdistrict.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <label
+                                    for="{{ form.district.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.district.label }}
+                                    <span aria-hidden="true">*</span>
+                                </label>
+
+                                {{ form.district }}
+
+                                {% for error in form.district.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12 col-md-8">
+                                <label
+                                    for="{{ form.province.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.province.label }}
+                                    <span aria-hidden="true">*</span>
+                                </label>
+
+                                {{ form.province }}
+
+                                {% for error in form.province.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <label
+                                    for="{{ form.postal_code.id_for_label }}"
+                                    class="address-form-label"
+                                >
+                                    {{ form.postal_code.label }}
+                                    <span aria-hidden="true">*</span>
+                                </label>
+
+                                {{ form.postal_code }}
+
+                                {% for error in form.postal_code.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="col-12">
+                                <div class="address-default-option">
+                                    {{ form.is_default }}
+
+                                    <label
+                                        for="{{ form.is_default.id_for_label }}"
+                                    >
+                                        {{ form.is_default.label }}
+                                    </label>
+                                </div>
+
+                                {% for error in form.is_default.errors %}
+                                    <div class="address-field-error">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                        <div class="address-form-actions">
+                            <a
+                                href="{% url 'accounts:address_list' %}"
+                                class="address-secondary-button"
+                            >
+                                ยกเลิก
+                            </a>
+
+                            <button
+                                type="submit"
+                                class="dashboard-primary-button"
+                            >
+                                {{ submit_label }}
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

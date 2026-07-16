@@ -1,0 +1,25 @@
+{% load static %}
+
+<section class="bestseller-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h2>BEST SELLERS</h2>
+            <p>สินค้ายอดนิยมจาก ÉLYSIA</p>
+        </div>
+
+        <div class="product-grid">
+
+            {% for product in best_seller_products %}
+                {% include "includes/product-card.html" %}
+            {% empty %}
+                <p class="empty-message">
+                    ยังไม่มีสินค้าขายดี
+                </p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>

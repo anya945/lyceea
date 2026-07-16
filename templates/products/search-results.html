@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+ค้นหาสินค้า | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="search-results-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h1>SEARCH PRODUCTS</h1>
+
+            {% if query %}
+                <p>
+                    ผลการค้นหา “{{ query }}”
+                    จำนวน {{ result_count }} รายการ
+                </p>
+            {% else %}
+                <p>กรอกคำค้นหาเพื่อค้นหาสินค้า</p>
+            {% endif %}
+        </div>
+
+        <form
+            class="search-page-form"
+            action="{% url 'products:product_search' %}"
+            method="get"
+        >
+            <input
+                type="search"
+                name="q"
+                value="{{ query }}"
+                placeholder="ค้นหาชื่อสินค้า กลิ่น SKU หรือหมวดสินค้า"
+                aria-label="ค้นหาสินค้า"
+                required
+            >
+
+            <button type="submit">
+                ค้นหา
+            </button>
+        </form>
+
+        {% if query %}
+
+            <div class="product-grid">
+
+                {% for product in page_obj %}
+                    {% include "includes/product-card.html" %}
+                {% empty %}
+                    <div class="empty-search-result">
+                        <h2>ไม่พบสินค้า</h2>
+                        <p>
+                            ลองใช้คำค้นหาอื่น เช่น Vanilla,
+                            Candle หรือ Reed Diffuser
+                        </p>
+
+                        <a href="{% url 'products:product_list' %}">
+                            ดูสินค้าทั้งหมด
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            {% if page_obj.paginator.num_pages > 1 %}
+                <nav class="pagination">
+
+                    {% if page_obj.has_previous %}
+                        <a href="?q={{ query|urlencode }}&page={{ page_obj.previous_page_number }}">
+                            ก่อนหน้า
+                        </a>
+                    {% endif %}
+
+                    <span>
+                        หน้า {{ page_obj.number }}
+                        จาก {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?q={{ query|urlencode }}&page={{ page_obj.next_page_number }}">
+                            ถัดไป
+                        </a>
+                    {% endif %}
+
+                </nav>
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

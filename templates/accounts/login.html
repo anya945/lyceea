@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+เข้าสู่ระบบ | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <p class="auth-eyebrow">ÉLYSIA MEMBER</p>
+
+                <h1>เข้าสู่ระบบ</h1>
+
+                <p>
+                    เข้าสู่ระบบเพื่อจัดการคำสั่งซื้อ
+                    ติดตามสถานะสินค้า และใช้งานบัญชีของคุณ
+                </p>
+            </div>
+
+            <form method="post" class="auth-form" novalidate>
+                {% csrf_token %}
+
+                {% if next %}
+                    <input type="hidden" name="next" value="{{ next }}">
+                {% endif %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-alert form-alert-error">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">
+                        ชื่อผู้ใช้งาน
+                    </label>
+
+                    {{ form.username }}
+
+                    {% for error in form.username.errors %}
+                        <p class="form-error">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">
+                        รหัสผ่าน
+                    </label>
+
+                    {{ form.password }}
+
+                    {% for error in form.password.errors %}
+                        <p class="form-error">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn auth-submit">
+                    เข้าสู่ระบบ
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    ยังไม่มีบัญชี?
+                    <a href="{% url 'accounts:register' %}">
+                        สมัครสมาชิก
+                    </a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

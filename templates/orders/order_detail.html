@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ order.order_number }} | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <p class="auth-eyebrow">
+                    ORDER DETAILS
+                </p>
+
+                <h1>{{ order.order_number }}</h1>
+
+                <p>
+                    สั่งซื้อเมื่อ
+                    {{ order.created_at|date:"d/m/Y H:i" }}
+                </p>
+            </div>
+
+            <div class="border rounded-3 p-4 mb-4">
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <strong>สถานะคำสั่งซื้อ</strong>
+                        <p class="mb-0">
+                            {{ order.get_order_status_display }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>สถานะการชำระเงิน</strong>
+                        <p class="mb-0">
+                            {{ order.get_payment_status_display }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>วิธีชำระเงิน</strong>
+                        <p class="mb-0">
+                            {{ order.get_payment_method_display }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>ผู้รับสินค้า</strong>
+                        <p class="mb-0">
+                            {{ order.recipient_name }}
+                        </p>
+                    </div>
+
+                    <div class="col-12">
+                        <strong>ที่อยู่จัดส่ง</strong>
+                        <p class="mb-0">
+                            {{ order.address }}
+                        </p>
+                    </div>
+
+                    <div class="col-12">
+                        <strong>เบอร์โทรศัพท์</strong>
+                        <p class="mb-0">
+                            {{ order.phone }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <h4 class="mb-3">รายการสินค้า</h4>
+
+            <div class="d-grid gap-3 mb-4">
+
+                {% for item in order.items.all %}
+                    <div class="border rounded-3 p-3">
+
+                        <div
+                            class="d-flex justify-content-between
+                                   align-items-start gap-3"
+                        >
+                            <div>
+                                <strong>
+                                    {{ item.product.name }}
+                                </strong>
+
+                                <p class="mb-0 text-muted">
+                                    จำนวน {{ item.quantity }} ชิ้น
+                                    × ฿{{ item.unit_price|floatformat:2 }}
+                                </p>
+                            </div>
+
+                            <strong>
+                                ฿{{ item.line_total|floatformat:2 }}
+                            </strong>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="border-top pt-4">
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>ยอดรวมสินค้า</span>
+                    <span>
+                        ฿{{ order.subtotal|floatformat:2 }}
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>ค่าจัดส่ง</span>
+                    <span>
+                        ฿{{ order.shipping_fee|floatformat:2 }}
+                    </span>
+                </div>
+
+                <div
+                    class="d-flex justify-content-between
+                           fs-5 fw-bold"
+                >
+                    <span>ยอดสุทธิ</span>
+                    <span>
+                        ฿{{ order.grand_total|floatformat:2 }}
+                    </span>
+                </div>
+
+            </div>
+
+        {% if order.payment_method != "COD" %}
+            {% if order.payment_status != "PAID" %}
+                    <div class="d-grid mt-4">
+                       <a
+                            href="{% url 'orders:payment' order.order_number %}"
+                            class="btn auth-submit"
+                        >
+                            แจ้งชำระเงิน
+
+                        </a>   
+                    </div>
+        {% else %}
+                  <div class="alert alert-success mt-4">
+                        
+                        ยืนยันการชำระเงินเรียบร้อยแล้ว
+
+                  </div>
+
+        {% endif %}
+    {% endif %}
+            <div class="auth-footer">
+                <a href="{% url 'orders:order_list' %}">
+                    ← กลับไปคำสั่งซื้อของฉัน
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

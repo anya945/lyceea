@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+ชำระเงิน {{ order.order_number }} | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <p class="auth-eyebrow">
+                    PAYMENT
+                </p>
+
+                <h1>แจ้งชำระเงิน</h1>
+
+                <p>
+                    คำสั่งซื้อ {{ order.order_number }}
+                </p>
+            </div>
+
+            <div class="border rounded-3 p-4 mb-4">
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>ยอดที่ต้องชำระ</span>
+
+                    <strong>
+                        ฿{{ order.grand_total|floatformat:2 }}
+                    </strong>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <span>วิธีชำระเงิน</span>
+
+                    <span>
+                        {{ order.get_payment_method_display }}
+                    </span>
+                </div>
+
+            </div>
+
+            {% if order.payment_method == "PROMPTPAY" %}
+
+                <div class="text-center mb-4">
+
+                    <h5>สแกน QR พร้อมเพย์</h5>
+
+                    <img
+                        src="{% static 'images/payment/promptpay-qr.png' %}"
+                        alt="QR พร้อมเพย์"
+                        class="img-fluid rounded-3 border p-2 mt-3"
+                        style="max-width: 280px;"
+                    >
+
+                    <p class="form-help mt-3">
+                        กรุณาตรวจสอบยอดเงินก่อนยืนยันการชำระเงิน
+                    </p>
+
+                </div>
+
+            {% elif order.payment_method == "BANK_TRANSFER" %}
+
+                <div class="border rounded-3 p-4 mb-4">
+                    <h5 class="mb-3">ข้อมูลบัญชีธนาคาร</h5>
+
+                    <p class="mb-2">
+                        ธนาคาร: กรุณาระบุชื่อธนาคาร
+                    </p>
+
+                    <p class="mb-2">
+                        เลขที่บัญชี: XXX-X-XXXXX-X
+                    </p>
+
+                    <p class="mb-0">
+                        ชื่อบัญชี: กรุณาระบุชื่อบัญชี
+                    </p>
+                </div>
+
+            {% endif %}
+
+            {% if is_paid %}
+
+                <div class="alert alert-success">
+                    คำสั่งซื้อนี้ได้รับการยืนยันการชำระเงินแล้ว
+                </div>
+
+            {% else %}
+
+                {% if order.payment_slip %}
+
+                    <div class="alert alert-warning">
+                        คุณส่งหลักฐานการชำระเงินแล้ว
+                        และกำลังรอเจ้าหน้าที่ตรวจสอบ
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <img
+                            src="{{ order.payment_slip.url }}"
+                            alt="สลิปการชำระเงิน"
+                            class="img-fluid rounded-3 border"
+                            style="max-width: 320px;"
+                        >
+                    </div>
+
+                {% endif %}
+
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                    class="auth-form"
+                    novalidate
+                >
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="{{ form.payment_slip.id_for_label }}">
+                            อัปโหลดหลักฐานการชำระเงิน
+                        </label>
+
+                        {{ form.payment_slip }}
+
+                        <small class="form-help">
+                            รองรับ JPG, PNG และ WEBP ขนาดไม่เกิน 5 MB
+                        </small>
+
+                        {% for error in form.payment_slip.errors %}
+                            <p class="form-error">
+                                {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn auth-submit"
+                    >
+                        ส่งหลักฐานการชำระเงิน
+                    </button>
+                </form>
+
+            {% endif %}
+
+            <div class="auth-footer">
+                <a
+                    href="{% url 'orders:order_detail' order.order_number %}"
+                >
+                    ← กลับไปหน้ารายละเอียดคำสั่งซื้อ
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

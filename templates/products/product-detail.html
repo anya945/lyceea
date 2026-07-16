@@ -1,0 +1,382 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ product.name }} | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="product-detail-section">
+    <div class="container">
+
+        <nav class="product-breadcrumb">
+            <a href="{% url 'products:home' %}">หน้าแรก</a>
+            <span>/</span>
+
+            <a href="{% url 'products:product_list' %}">
+                สินค้า
+            </a>
+            <span>/</span>
+
+            <span>{{ product.name }}</span>
+        </nav>
+
+        <div class="product-detail-grid">
+
+            <div class="product-gallery">
+
+                {% with primary_image=product.images.first %}
+                    <div class="main-product-image">
+
+                        {% if primary_image %}
+                            <img
+                                id="main-product-image"
+                                src="{{ primary_image.image.url }}"
+                                alt="{{ primary_image.alt_text|default:product.name }}"
+                            >
+                        {% else %}
+                            <img
+                                id="main-product-image"
+                                src="{% static 'images/products/product-01.jpg' %}"
+                                alt="{{ product.name }}"
+                            >
+                        {% endif %}
+
+                    </div>
+                {% endwith %}
+
+                {% if product.images.all %}
+                    <div class="product-thumbnails">
+
+                        {% for image in product.images.all %}
+                            <button
+                                type="button"
+                                class="thumbnail-btn{% if forloop.first %} active{% endif %}"
+                                data-image-url="{{ image.image.url }}"
+                                aria-label="ดูรูป {{ forloop.counter }} ของ {{ product.name }}"
+                            >
+                                <img
+                                    src="{{ image.image.url }}"
+                                    alt="{{ image.alt_text|default:product.name }}"
+                                >
+                            </button>
+                        {% endfor %}
+
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="product-detail-info">
+
+                <p class="product-detail-category">
+                    {{ product.category.name }}
+                </p>
+
+                <h1>{{ product.name }}</h1>
+
+                <div class="product-detail-badges">
+
+                    {% if product.is_best_seller %}
+                        <span class="product-badge">
+                            Best Seller
+                        </span>
+                    {% endif %}
+
+                    {% if product.is_featured %}
+                        <span class="product-badge">
+                            Featured
+                        </span>
+                    {% endif %}
+
+                </div>
+
+                <p class="product-detail-short-description">
+                    {{ product.short_description }}
+                </p>
+
+                <div class="product-detail-price">
+
+                    {% if product.discount_price %}
+                        <span class="original-price">
+                            ฿{{ product.price|floatformat:0 }}
+                        </span>
+
+                        <strong class="sale-price">
+                            ฿{{ product.discount_price|floatformat:0 }}
+                        </strong>
+                    {% else %}
+                        <strong class="regular-price">
+                            ฿{{ product.price|floatformat:0 }}
+                        </strong>
+                    {% endif %}
+
+                </div>
+
+                <div class="product-stock">
+
+                    {% if product.stock > 5 %}
+                        <span class="stock-in">
+                            พร้อมขาย
+                        </span>
+                    {% elif product.stock > 0 %}
+                        <span class="stock-low">
+                            เหลือเพียง {{ product.stock }} ชิ้น
+                        </span>
+                    {% else %}
+                        <span class="stock-out">
+                            สินค้าหมด
+                        </span>
+                    {% endif %}
+
+                </div>
+
+                <div class="product-meta">
+                    <p>
+                        <strong>SKU:</strong>
+                        {{ product.sku }}
+                    </p>
+
+                    <p>
+                        <strong>หมวดหมู่:</strong>
+                        {{ product.category.name }}
+                    </p>
+                </div>
+
+                <div class="product-purchase">
+
+                    <label for="product-quantity">
+                        จำนวน
+                    </label>
+
+                    <div class="quantity-selector">
+                        <button
+                            type="button"
+                            class="quantity-btn"
+                            data-action="decrease"
+                        >
+                            −
+                        </button>
+
+                        <input
+                            id="product-quantity"
+                            type="number"
+                            value="1"
+                            min="1"
+                            max="{{ product.stock }}"
+                        >
+
+                        <button
+                            type="button"
+                            class="quantity-btn"
+                            data-action="increase"
+                        >
+                            +
+                        </button>
+                    </div>
+
+                    <form
+                        action="{% url 'products:cart_add' product.id %}"
+                        method="post"
+                        class="product-detail-cart-form"
+                    >
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <input
+                            type="hidden"
+                            name="quantity"
+                            id="cart-quantity"
+                            value="1"
+                        >
+
+                        <button
+                            class="add-cart-btn product-detail-cart-btn"
+                            type="submit"
+                            {% if product.stock == 0 %}disabled{% endif %}
+                        >
+                            {% if product.stock > 0 %}
+                                เพิ่มลงตะกร้า
+                            {% else %}
+                                สินค้าหมด
+                            {% endif %}
+                        </button>
+                    </form>
+
+                    <form
+    action="{% url 'products:toggle_wishlist' product.id %}"
+    method="post"
+    class="product-detail-wishlist-form"
+>
+    {% csrf_token %}
+
+    <input
+        type="hidden"
+        name="next"
+        value="{{ request.get_full_path }}"
+    >
+
+    <button
+        type="submit"
+        class="
+            product-detail-wishlist-btn
+            {% if product.id in wishlist_ids %}
+                active
+            {% endif %}
+        "
+        aria-label="
+            {% if product.id in wishlist_ids %}
+                ลบ {{ product.name }} ออกจากรายการโปรด
+            {% else %}
+                เพิ่ม {{ product.name }} ในรายการโปรด
+            {% endif %}
+        "
+    >
+
+        <svg
+            class="wishlist-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path
+                d="
+                    M20.8 4.6
+                    a5.5 5.5 0 0 0-7.8 0
+                    L12 5.7
+                    l-1.1-1.1
+                    a5.5 5.5 0 0 0-7.8 7.8
+                    L12 21
+                    l8.8-8.6
+                    a5.5 5.5 0 0 0 0-7.8
+                    Z
+                "
+            />
+        </svg>
+
+        <span>
+            {% if product.id in wishlist_ids %}
+                ลบจากรายการโปรด
+            {% else %}
+                เพิ่มในรายการโปรด
+            {% endif %}
+        </span>
+
+    </button>
+
+</form>
+                </div>
+
+                <div class="product-description-block">
+                    <h2>รายละเอียดสินค้า</h2>
+
+                    <p>
+                        {{ product.description|linebreaksbr }}
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% if related_products %}
+<section class="related-products-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h2>RELATED PRODUCTS</h2>
+            <p>สินค้าอื่นที่คุณอาจชื่นชอบ</p>
+        </div>
+
+        <div class="product-grid">
+
+            {% for product in related_products %}
+                {% include "includes/product-card.html" %}
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail-btn');
+        const quantityInput = document.getElementById('product-quantity');
+        const cartQuantityInput = document.getElementById('cart-quantity');
+        const quantityButtons = document.querySelectorAll('.quantity-btn');
+
+        function syncCartQuantity() {
+            if (!quantityInput || !cartQuantityInput) {
+                return;
+            }
+
+            cartQuantityInput.value = quantityInput.value;
+        }
+
+        thumbnails.forEach(function (button) {
+            button.addEventListener('click', function () {
+                if (!mainImage) {
+                    return;
+                }
+
+                mainImage.src = button.dataset.imageUrl;
+
+                thumbnails.forEach(function (item) {
+                    item.classList.remove('active');
+                });
+
+                button.classList.add('active');
+            });
+        });
+
+        quantityButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                if (!quantityInput) {
+                    return;
+                }
+
+                const minimum = Number(quantityInput.min) || 1;
+                const maximum = Number(quantityInput.max) || 999;
+                let value = Number(quantityInput.value) || minimum;
+
+                if (button.dataset.action === 'increase') {
+                    value = Math.min(value + 1, maximum);
+                } else {
+                    value = Math.max(value - 1, minimum);
+                }
+
+                quantityInput.value = value;
+                syncCartQuantity();
+            });
+        });
+
+        if (quantityInput) {
+            quantityInput.addEventListener('input', function () {
+                const minimum = Number(quantityInput.min) || 1;
+                const maximum = Number(quantityInput.max) || 999;
+                let value = Number(quantityInput.value) || minimum;
+
+                value = Math.max(minimum, Math.min(value, maximum));
+                quantityInput.value = value;
+
+                syncCartQuantity();
+            });
+        }
+
+        syncCartQuantity();
+    });
+</script>
+
+{% endblock %}

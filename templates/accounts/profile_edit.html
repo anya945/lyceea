@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+แก้ไขโปรไฟล์ | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <p class="auth-eyebrow">
+                    ÉLYSIA MEMBER
+                </p>
+
+                <h1>แก้ไขโปรไฟล์</h1>
+
+                <p>
+                    ปรับปรุงข้อมูลบัญชีและอีเมลสำหรับรับข้อมูลคำสั่งซื้อ
+                </p>
+            </div>
+
+            <form method="post" class="auth-form" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-alert form-alert-error">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">
+                        ชื่อผู้ใช้งาน
+                    </label>
+
+                    {{ form.username }}
+
+                    {% for error in form.username.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">
+                        ชื่อ
+                    </label>
+
+                    {{ form.first_name }}
+
+                    {% for error in form.first_name.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}">
+                        นามสกุล
+                    </label>
+
+                    {{ form.last_name }}
+
+                    {% for error in form.last_name.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">
+                        อีเมล
+                    </label>
+
+                    {{ form.email }}
+
+                    <small class="form-help">
+                        ใช้สำหรับรับข้อมูลคำสั่งซื้อและรีเซ็ตรหัสผ่าน
+                    </small>
+
+                    {% for error in form.email.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn auth-submit">
+                    บันทึกการเปลี่ยนแปลง
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <a href="{% url 'accounts:profile' %}">
+                    ← กลับไปหน้าโปรไฟล์
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

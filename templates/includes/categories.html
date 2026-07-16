@@ -1,0 +1,39 @@
+<section class="category-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h2>SHOP BY CATEGORY</h2>
+        </div>
+
+        <div class="category-grid">
+
+            {% for category in categories %}
+                <div class="category-card">
+
+                    {% if category.image %}
+                        <img
+                            src="{{ category.image.url }}"
+                            alt="{{ category.name }}"
+                        >
+                    {% else %}
+                        <img
+                            src="/static/images/categories/category-glass.jpg"
+                            alt="{{ category.name }}"
+                        >
+                    {% endif %}
+
+                    <div class="category-info">
+                        <h4>{{ category.name }}</h4>
+                        <p>{{ category.slug|upper }}</p>
+                    </div>
+
+                </div>
+            {% empty %}
+                <p>ยังไม่มีหมวดสินค้า</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>

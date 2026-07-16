@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+รายการโปรด | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="wishlist-page-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+
+            <h1>MY WISHLIST</h1>
+
+            <p>
+                รายการสินค้าที่คุณชื่นชอบ
+
+                {% if wishlist_products %}
+                    จำนวน
+                    {{ wishlist_products|length }}
+                    รายการ
+                {% endif %}
+            </p>
+        </div>
+
+        {% if wishlist_products %}
+
+            <div class="product-grid">
+
+                {% for product in wishlist_products %}
+                    {% include "includes/product-card.html" %}
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-wishlist">
+                <div
+                    class="empty-wishlist-icon"
+                    aria-hidden="true"
+                >
+                    ♡
+                </div>
+
+                <h2>
+                    ยังไม่มีสินค้าในรายการโปรด
+                </h2>
+
+                <p>
+                    เลือกสินค้าที่คุณชื่นชอบ
+                    แล้วกดไอคอนหัวใจเพื่อบันทึกไว้ที่นี่
+                </p>
+
+                <a href="{% url 'products:product_list' %}">
+                    เลือกดูสินค้า
+                </a>
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

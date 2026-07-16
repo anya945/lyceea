@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+ตะกร้าสินค้า | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="cart-page-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h1>SHOPPING CART</h1>
+            <p>ตรวจสอบสินค้าและจำนวนก่อนดำเนินการสั่งซื้อ</p>
+        </div>
+
+        {% if cart|length > 0 %}
+
+            <div class="cart-layout">
+
+                <div class="cart-items">
+
+                    {% for item in cart %}
+                        <article class="cart-item">
+
+                            <div class="cart-item-image">
+                                {% with image=item.product.images.first %}
+                                    {% if image %}
+                                        <img
+                                            src="{{ image.image.url }}"
+                                            alt="{{ image.alt_text|default:item.product.name }}"
+                                        >
+                                    {% else %}
+                                        <img
+                                            src="{% static 'images/products/product-01.jpg' %}"
+                                            alt="{{ item.product.name }}"
+                                        >
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+
+                            <div class="cart-item-info">
+
+                                <p class="cart-item-category">
+                                    {{ item.product.category.name }}
+                                </p>
+
+                                <h2>
+                                    <a href="{% url 'products:product_detail' item.product.slug %}">
+                                        {{ item.product.name }}
+                                    </a>
+                                </h2>
+
+                                <p class="cart-item-sku">
+                                    SKU: {{ item.product.sku }}
+                                </p>
+
+                                <div class="cart-item-price">
+                                    ฿{{ item.price|floatformat:0 }}
+                                </div>
+
+                            </div>
+
+                            <div class="cart-item-actions">
+
+                                <form
+                                    action="{% url 'products:cart_update' item.product.id %}"
+                                    method="post"
+                                    class="cart-quantity-form"
+                                >
+                                    {% csrf_token %}
+
+                                    <label for="quantity-{{ item.product.id }}">
+                                        จำนวน
+                                    </label>
+
+                                    <div class="quantity-selector">
+                                        <button
+                                            type="button"
+                                            class="quantity-btn"
+                                            data-action="decrease"
+                                            data-target="quantity-{{ item.product.id }}"
+                                        >
+                                            −
+                                        </button>
+
+                                        <input
+                                            id="quantity-{{ item.product.id }}"
+                                            type="number"
+                                            name="quantity"
+                                            value="{{ item.quantity }}"
+                                            min="1"
+                                            max="{{ item.product.stock }}"
+                                        >
+
+                                        <button
+                                            type="button"
+                                            class="quantity-btn"
+                                            data-action="increase"
+                                            data-target="quantity-{{ item.product.id }}"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        class="cart-update-btn"
+                                    >
+                                        อัปเดต
+                                    </button>
+                                </form>
+
+                                <div class="cart-line-total">
+                                    รวม
+                                    <strong>
+                                        ฿{{ item.total_price|floatformat:0 }}
+                                    </strong>
+                                </div>
+
+                                <form
+                                    action="{% url 'products:cart_remove' item.product.id %}"
+                                    method="post"
+                                >
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="cart-remove-btn"
+                                    >
+                                        ลบสินค้า
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </article>
+                    {% endfor %}
+
+                </div>
+
+                <aside class="cart-summary">
+
+                    <h2>สรุปคำสั่งซื้อ</h2>
+
+                    <div class="cart-summary-row">
+                        <span>จำนวนสินค้า</span>
+                        <strong>{{ cart|length }} ชิ้น</strong>
+                    </div>
+
+                    <div class="cart-summary-row">
+                        <span>ยอดรวมสินค้า</span>
+                        <strong>
+                            ฿{{ cart.get_total_price|floatformat:0 }}
+                        </strong>
+                    </div>
+
+                    <div class="cart-summary-row">
+                        <span>ค่าจัดส่ง</span>
+                        <span>คำนวณในขั้นตอนถัดไป</span>
+                    </div>
+
+                    <div class="cart-summary-total">
+                        <span>ยอดรวม</span>
+                        <strong>
+                            ฿{{ cart.get_total_price|floatformat:0 }}
+                        </strong>
+                    </div>
+
+                    <a
+    href="{% url 'products:checkout' %}"
+    class="checkout-btn"
+>
+    ดำเนินการชำระเงิน
+</a>
+
+                    <a
+                        href="{% url 'products:product_list' %}"
+                        class="continue-shopping-link"
+                    >
+                        เลือกซื้อสินค้าต่อ
+                    </a>
+
+                </aside>
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">🛍️</div>
+
+                <h2>ตะกร้าสินค้ายังว่าง</h2>
+
+                <p>
+                    เลือกสินค้าที่คุณชื่นชอบแล้วเพิ่มลงตะกร้า
+                </p>
+
+                <a href="{% url 'products:product_list' %}">
+                    เลือกดูสินค้า
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttons = document.querySelectorAll(
+            '.cart-quantity-form .quantity-btn'
+        );
+
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const targetId = button.dataset.target;
+                const input = document.getElementById(targetId);
+
+                if (!input) {
+                    return;
+                }
+
+                const minimum = Number(input.min) || 1;
+                const maximum = Number(input.max) || 999;
+                let value = Number(input.value) || minimum;
+
+                if (button.dataset.action === 'increase') {
+                    value = Math.min(value + 1, maximum);
+                } else {
+                    value = Math.max(value - 1, minimum);
+                }
+
+                input.value = value;
+            });
+        });
+    });
+</script>
+
+{% endblock %}

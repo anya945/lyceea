@@ -1,0 +1,23 @@
+<section class="bestseller-section featured-products-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h2>FEATURED PRODUCTS</h2>
+            <p>สินค้าที่คัดสรรเป็นพิเศษจาก ÉLYSIA</p>
+        </div>
+
+        <div class="product-grid">
+
+            {% for product in featured_products %}
+                {% include "includes/product-card.html" %}
+            {% empty %}
+                <p class="empty-message">
+                    ยังไม่มีสินค้าแนะนำ
+                </p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>

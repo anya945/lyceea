@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+ชำระเงิน | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="checkout-page-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h1>CHECKOUT</h1>
+            <p>
+                กรอกข้อมูลสำหรับจัดส่งและตรวจสอบคำสั่งซื้อ
+            </p>
+        </div>
+
+        <form method="post" class="checkout-layout">
+            {% csrf_token %}
+
+            <div class="checkout-form-card">
+
+                <!-- Address Book -->
+                <section class="checkout-address-book">
+                    <div class="checkout-address-header">
+                        <div>
+                            <h2>เลือกที่อยู่จัดส่ง</h2>
+
+                            <p>
+                                เลือกจากที่อยู่ที่บันทึกไว้
+                                หรือแก้ไขข้อมูลด้านล่างสำหรับคำสั่งซื้อนี้
+                            </p>
+                        </div>
+
+                        <a
+                            href="{% url 'accounts:address_create' %}"
+                            class="checkout-add-address-link"
+                        >
+                            + เพิ่มที่อยู่
+                        </a>
+                    </div>
+
+                    {% if addresses %}
+                        <div class="checkout-address-options">
+
+                            {% for address in addresses %}
+                                <label
+                                    class="
+                                        checkout-address-option
+                                        {% if address.is_default %}
+                                            is-default
+                                        {% endif %}
+                                    "
+                                >
+                                    <input
+                                        type="radio"
+                                        name="saved_address"
+                                        value="{{ address.id }}"
+                                        class="checkout-address-radio"
+                                        data-recipient-name="{{ address.recipient_name }}"
+                                        data-phone="{{ address.phone }}"
+                                        data-address-line="{{ address.address_line }}"
+                                        data-subdistrict="{{ address.subdistrict }}"
+                                        data-district="{{ address.district }}"
+                                        data-province="{{ address.province }}"
+                                        data-postal-code="{{ address.postal_code }}"
+                                        {% if address.is_default %}
+                                            checked
+                                        {% elif not default_address and forloop.first %}
+                                            checked
+                                        {% endif %}
+                                    >
+
+                                    <span class="checkout-address-content">
+                                        <span class="checkout-address-top">
+                                            <strong>
+                                                {{ address.recipient_name }}
+                                            </strong>
+
+                                            {% if address.is_default %}
+                                                <span
+                                                    class="checkout-default-badge"
+                                                >
+                                                    ที่อยู่หลัก
+                                                </span>
+                                            {% endif %}
+                                        </span>
+
+                                        <span>
+                                            {{ address.phone }}
+                                        </span>
+
+                                        <span>
+                                            {{ address.address_line }}
+                                        </span>
+
+                                        <span>
+                                            {% if address.subdistrict %}
+                                                {{ address.subdistrict }}
+                                            {% endif %}
+
+                                            {{ address.district }}
+                                            {{ address.province }}
+                                            {{ address.postal_code }}
+                                        </span>
+                                    </span>
+                                </label>
+                            {% endfor %}
+
+                        </div>
+                    {% else %}
+                        <div class="checkout-address-empty">
+                            <p>
+                                คุณยังไม่มีที่อยู่ใน Address Book
+                            </p>
+
+                            <span>
+                                สามารถกรอกข้อมูลจัดส่งด้านล่าง
+                                หรือเพิ่มที่อยู่ไว้ใช้ในการสั่งซื้อครั้งต่อไป
+                            </span>
+                        </div>
+                    {% endif %}
+                </section>
+
+                <div class="checkout-form-divider"></div>
+
+                <h2>ข้อมูลผู้รับสินค้า</h2>
+
+                {% if form.non_field_errors %}
+                    <div class="checkout-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="checkout-form-grid">
+
+                    <div class="checkout-field full-width">
+                        {{ form.full_name.label_tag }}
+                        {{ form.full_name }}
+                        {{ form.full_name.errors }}
+                    </div>
+
+                    <div class="checkout-field">
+                        {{ form.phone.label_tag }}
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                    </div>
+
+                    <div class="checkout-field">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="checkout-field full-width">
+                        {{ form.address.label_tag }}
+                        {{ form.address }}
+                        {{ form.address.errors }}
+                    </div>
+
+                    <div class="checkout-field">
+                        {{ form.district.label_tag }}
+                        {{ form.district }}
+                        {{ form.district.errors }}
+                    </div>
+
+                    <div class="checkout-field">
+                        {{ form.province.label_tag }}
+                        {{ form.province }}
+                        {{ form.province.errors }}
+                    </div>
+
+                    <div class="checkout-field">
+                        {{ form.postal_code.label_tag }}
+                        {{ form.postal_code }}
+                        {{ form.postal_code.errors }}
+                    </div>
+
+                    <div class="checkout-field full-width">
+                        <p class="checkout-field-label">
+                            วิธีชำระเงิน
+                        </p>
+
+                        <div class="payment-options">
+                            {{ form.payment_method }}
+                        </div>
+
+                        {{ form.payment_method.errors }}
+                    </div>
+
+                    <div class="checkout-field full-width">
+                        {{ form.order_note.label_tag }}
+                        {{ form.order_note }}
+                        {{ form.order_note.errors }}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <aside class="checkout-summary">
+
+                <h2>สรุปคำสั่งซื้อ</h2>
+
+                <div class="checkout-products">
+
+                    {% for item in cart %}
+                        <div class="checkout-product">
+
+                            <div>
+                                <strong>
+                                    {{ item.product.name }}
+                                </strong>
+
+                                <small>
+                                    {{ item.quantity }} ×
+                                    ฿{{ item.price|floatformat:0 }}
+                                </small>
+                            </div>
+
+                            <strong>
+                                ฿{{ item.total_price|floatformat:0 }}
+                            </strong>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="checkout-summary-row">
+                    <span>ยอดรวมสินค้า</span>
+
+                    <strong>
+                        ฿{{ subtotal|floatformat:0 }}
+                    </strong>
+                </div>
+
+                <div class="checkout-summary-row">
+                    <span>ค่าจัดส่ง</span>
+
+                    {% if shipping_cost == 0 %}
+                        <strong>ฟรี</strong>
+                    {% else %}
+                        <strong>
+                            ฿{{ shipping_cost|floatformat:0 }}
+                        </strong>
+                    {% endif %}
+                </div>
+
+                <div class="checkout-summary-total">
+                    <span>ยอดชำระทั้งหมด</span>
+
+                    <strong>
+                        ฿{{ grand_total|floatformat:0 }}
+                    </strong>
+                </div>
+
+                <button
+                    type="submit"
+                    class="place-order-btn"
+                >
+                    ยืนยันคำสั่งซื้อ
+                </button>
+
+                <p class="checkout-notice">
+                    การกดปุ่มยืนยัน
+                    หมายถึงคุณตรวจสอบข้อมูลและรายการสินค้า
+                    เรียบร้อยแล้ว
+                </p>
+
+            </aside>
+
+        </form>
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+            const addressRadios = document.querySelectorAll(
+                ".checkout-address-radio"
+            );
+
+            const fullNameInput = document.getElementById(
+                "id_full_name"
+            );
+            const phoneInput = document.getElementById(
+                "id_phone"
+            );
+            const addressInput = document.getElementById(
+                "id_address"
+            );
+            const districtInput = document.getElementById(
+                "id_district"
+            );
+            const provinceInput = document.getElementById(
+                "id_province"
+            );
+            const postalCodeInput = document.getElementById(
+                "id_postal_code"
+            );
+
+            function updateSelectedCard(radio) {
+                document
+                    .querySelectorAll(
+                        ".checkout-address-option"
+                    )
+                    .forEach(function (option) {
+                        option.classList.remove(
+                            "is-selected"
+                        );
+                    });
+
+                const selectedCard = radio.closest(
+                    ".checkout-address-option"
+                );
+
+                if (selectedCard) {
+                    selectedCard.classList.add(
+                        "is-selected"
+                    );
+                }
+            }
+
+            function fillAddressForm(radio) {
+                if (!radio) {
+                    return;
+                }
+
+                const addressParts = [
+                    radio.dataset.addressLine,
+                    radio.dataset.subdistrict,
+                ].filter(Boolean);
+
+                if (fullNameInput) {
+                    fullNameInput.value =
+                        radio.dataset.recipientName || "";
+                }
+
+                if (phoneInput) {
+                    phoneInput.value =
+                        radio.dataset.phone || "";
+                }
+
+                if (addressInput) {
+                    addressInput.value =
+                        addressParts.join(" ");
+                }
+
+                if (districtInput) {
+                    districtInput.value =
+                        radio.dataset.district || "";
+                }
+
+                if (provinceInput) {
+                    provinceInput.value =
+                        radio.dataset.province || "";
+                }
+
+                if (postalCodeInput) {
+                    postalCodeInput.value =
+                        radio.dataset.postalCode || "";
+                }
+
+                updateSelectedCard(radio);
+            }
+
+            addressRadios.forEach(function (radio) {
+                radio.addEventListener(
+                    "change",
+                    function () {
+                        fillAddressForm(radio);
+                    }
+                );
+            });
+
+            const selectedAddress =
+                document.querySelector(
+                    ".checkout-address-radio:checked"
+                );
+
+            const hasValidationErrors =
+                document.querySelector(
+                    ".checkout-errors, .errorlist"
+                );
+
+            if (
+                selectedAddress
+                && !hasValidationErrors
+            ) {
+                fillAddressForm(selectedAddress);
+            } else if (selectedAddress) {
+                updateSelectedCard(selectedAddress);
+            }
+        }
+    );
+</script>
+
+{% endblock %}

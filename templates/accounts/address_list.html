@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}
+ที่อยู่ของฉัน | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="customer-dashboard">
+    <div class="container">
+
+        <div class="dashboard-heading">
+
+            <div>
+                <h1 class="dashboard-title">
+                    ที่อยู่ของฉัน
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    จัดการที่อยู่สำหรับการจัดส่งสินค้า
+                </p>
+            </div>
+
+            <a
+                href="{% url 'accounts:address_create' %}"
+                class="dashboard-primary-button"
+            >
+                + เพิ่มที่อยู่
+            </a>
+
+        </div>
+
+        {% if addresses %}
+
+            <div class="row g-4">
+
+                {% for address in addresses %}
+
+                <div class="col-lg-6">
+
+                    <div class="dashboard-card address-card">
+
+                        {% if address.is_default %}
+                        <span class="default-address-badge">
+                            ที่อยู่หลัก
+                        </span>
+                        {% endif %}
+
+                        <h5>
+                            {{ address.recipient_name }}
+                        </h5>
+
+                        <p>
+                            {{ address.phone }}
+                        </p>
+
+                        <p>
+                            {{ address.address_line }}
+                        </p>
+
+                        <p>
+                            {{ address.subdistrict }}
+                            {{ address.district }}
+                        </p>
+
+                        <p>
+                            {{ address.province }}
+                            {{ address.postal_code }}
+                        </p>
+
+                        <div class="address-actions">
+
+    {% if not address.is_default %}
+        <form
+            method="post"
+            action="{% url 'accounts:address_set_default' address.id %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="address-default-button"
+            >
+                ตั้งเป็นที่อยู่หลัก
+            </button>
+        </form>
+    {% endif %}
+
+    <a
+        href="{% url 'accounts:address_update' address.id %}"
+        class="btn btn-outline-dark btn-sm"
+    >
+        แก้ไข
+    </a>
+
+    <form
+        method="post"
+        action="{% url 'accounts:address_delete' address.id %}"
+    >
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="btn btn-outline-danger btn-sm"
+            onclick="
+                return confirm(
+                    'ยืนยันการลบที่อยู่นี้หรือไม่?'
+                );
+            "
+        >
+            ลบ
+        </button>
+    </form>
+
+</div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="dashboard-card dashboard-empty-state">
+
+                <h3>
+                    ยังไม่มีที่อยู่
+                </h3>
+
+                <p>
+                    เพิ่มที่อยู่แรกของคุณ
+                    เพื่อใช้ในการสั่งซื้อสินค้า
+                </p>
+
+                <a
+                    href="{% url 'accounts:address_create' %}"
+                    class="dashboard-primary-button"
+                >
+                    เพิ่มที่อยู่
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

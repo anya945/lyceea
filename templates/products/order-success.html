@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}
+สั่งซื้อสำเร็จ | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="order-success-section">
+    <div class="container">
+
+        <div class="order-success-card">
+
+            <div class="order-success-icon">
+                ✓
+            </div>
+
+            <h1>สั่งซื้อสำเร็จ</h1>
+
+            <p>
+                ขอบคุณสำหรับคำสั่งซื้อจาก ÉLYSIA
+            </p>
+
+            <div class="order-number">
+                เลขคำสั่งซื้อ
+                <strong>{{ order.order_number }}</strong>
+            </div>
+
+            <div class="order-success-summary">
+
+                <h2>สรุปรายการ</h2>
+
+                {% for item in order.items %}
+                    <div class="order-success-item">
+                        <span>
+                            {{ item.name }}
+                            × {{ item.quantity }}
+                        </span>
+
+                        <strong>
+                            ฿{{ item.total_price|floatformat:0 }}
+                        </strong>
+                    </div>
+                {% endfor %}
+
+                <div class="order-success-item">
+                    <span>ค่าจัดส่ง</span>
+
+                    {% if order.shipping_cost == "0.00" %}
+                        <strong>ฟรี</strong>
+                    {% else %}
+                        <strong>
+                            ฿{{ order.shipping_cost|floatformat:0 }}
+                        </strong>
+                    {% endif %}
+                </div>
+
+                <div class="order-success-total">
+                    <span>ยอดรวมทั้งหมด</span>
+
+                    <strong>
+                        ฿{{ order.grand_total|floatformat:0 }}
+                    </strong>
+                </div>
+
+            </div>
+
+            <p>
+                วิธีชำระเงิน:
+                <strong>{{ order.payment_method }}</strong>
+            </p>
+
+            <a href="{% url 'products:product_list' %}">
+                กลับไปเลือกซื้อสินค้า
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+
+{% if order.payment_method_code != "COD" %}
+    <div class="d-grid gap-3 mt-4">
+
+        <a
+            href="{% url 'orders:payment' order.order_number %}"
+            class="btn auth-submit"
+        >
+            ไปหน้าชำระเงินและอัปโหลดสลิป
+        </a>
+
+        <a
+            href="{% url 'orders:order_detail' order.order_number %}"
+            class="btn btn-outline-dark"
+        >
+            ดูรายละเอียดคำสั่งซื้อ
+        </a>
+
+    </div>
+{% endif %}

@@ -1,0 +1,120 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg elysia-navbar">
+    <div class="container">
+
+        <a
+            class="navbar-brand brand-logo"
+            href="{% url 'products:home' %}"
+        >
+            ÉLYSIA
+            <span>BOTANICAL CANDLE</span>
+        </a>
+
+        <div class="navbar-menu">
+            <a href="{% url 'products:home' %}">
+                หน้าแรก
+            </a>
+
+            <a href="{% url 'products:product_list' %}">
+                สินค้า
+            </a>
+
+            <a href="#">
+                คอลเลกชัน
+            </a>
+
+            <a href="#">
+                เกี่ยวกับเรา
+            </a>
+
+            <a href="#">
+                รีวิว
+            </a>
+
+            <a href="#">
+                บทความ
+            </a>
+
+            <a href="#">
+                ติดต่อเรา
+            </a>
+        </div>
+
+        <div class="navbar-icons">
+
+            <a
+                href="{% url 'products:product_search' %}"
+                aria-label="ค้นหาสินค้า"
+                title="ค้นหาสินค้า"
+            >
+                <span>⌕</span>
+            </a>
+
+            <a
+                class="navbar-wishlist-link"
+                href="{% url 'products:wishlist' %}"
+                aria-label="รายการโปรด"
+                title="รายการโปรด"
+            >
+                <span>
+                    {% if wishlist_count %}
+                        ♥
+                    {% else %}
+                        ♡
+                    {% endif %}
+                </span>
+
+                {% if wishlist_count %}
+                    <small class="navbar-icon-count">
+                        {{ wishlist_count }}
+                    </small>
+                {% endif %}
+            </a>
+
+            <a
+                class="navbar-cart-link"
+                href="{% url 'products:cart_detail' %}"
+                aria-label="ตะกร้าสินค้า"
+                title="ตะกร้าสินค้า"
+            >
+                <span>🛍️</span>
+
+                {% if cart_count %}
+                    <small class="navbar-icon-count">
+                        {{ cart_count }}
+                    </small>
+                {% endif %}
+            </a>
+
+            {% if user.is_authenticated %}
+                <form
+                    method="post"
+                    action="{% url 'accounts:logout' %}"
+                    class="logout-form"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="nav-icon-button"
+                        aria-label="ออกจากระบบ"
+                        title="ออกจากระบบ"
+                    >
+                        <span>♙</span>
+                    </button>
+                </form>
+            {% else %}
+                <a
+                    href="{% url 'accounts:login' %}"
+                    aria-label="เข้าสู่ระบบ"
+                    title="เข้าสู่ระบบ"
+                >
+                    <span>♙</span>
+                </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+</nav>

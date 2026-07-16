@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}
+คำสั่งซื้อของฉัน | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <p class="auth-eyebrow">
+                    ÉLYSIA MEMBER
+                </p>
+
+                <h1>คำสั่งซื้อของฉัน</h1>
+
+                <p>
+                    ตรวจสอบประวัติและสถานะคำสั่งซื้อของคุณ
+                </p>
+            </div>
+
+            {% if orders %}
+
+                <div class="d-grid gap-3">
+
+                    {% for order in orders %}
+                        <div class="border rounded-3 p-4">
+
+                            <div
+                                class="d-flex flex-wrap
+                                       justify-content-between
+                                       align-items-start gap-3"
+                            >
+                                <div>
+                                    <p class="mb-1 text-muted">
+                                        เลขที่คำสั่งซื้อ
+                                    </p>
+
+                                    <h5 class="mb-2">
+                                        {{ order.order_number }}
+                                    </h5>
+
+                                    <p class="mb-0 text-muted">
+                                        {{ order.created_at|date:"d/m/Y H:i" }}
+                                    </p>
+                                </div>
+
+                                <div class="text-end">
+                                    <p class="mb-1">
+                                        {{ order.get_order_status_display }}
+                                    </p>
+
+                                    <strong>
+                                        ฿{{ order.grand_total|floatformat:2 }}
+                                    </strong>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div
+                                class="d-flex flex-wrap
+                                       justify-content-between
+                                       align-items-center gap-3"
+                            >
+                                <span>
+                                    การชำระเงิน:
+                                    {{ order.get_payment_status_display }}
+                                </span>
+
+                                <div class="d-flex flex-wrap gap-2">
+
+                                    {% if order.payment_method != "COD" and order.payment_status != "PAID" %}
+                                        <a
+                                            href="{% url 'orders:payment' order.order_number %}"
+                                            class="btn auth-submit"
+                                        >
+                                            แจ้งชำระเงิน
+                                        </a>
+                                    {% endif %}
+
+                                    <a
+                                        href="{% url 'orders:order_detail' order.order_number %}"
+                                        class="btn btn-outline-dark"
+                                    >
+                                        ดูรายละเอียด
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="text-center py-5">
+                    <h5>ยังไม่มีคำสั่งซื้อ</h5>
+
+                    <p class="text-muted">
+                        เมื่อสั่งซื้อสินค้า รายการจะแสดงที่หน้านี้
+                    </p>
+
+                    <a
+                        href="{% url 'products:product_list' %}"
+                        class="btn auth-submit mt-3"
+                    >
+                        เลือกซื้อสินค้า
+                    </a>
+                </div>
+
+            {% endif %}
+
+            <div class="auth-footer">
+                <a href="{% url 'accounts:profile' %}">
+                    ← กลับไปหน้าโปรไฟล์
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+สินค้า | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="product-list-section">
+    <div class="container">
+
+        <div class="section-heading">
+            <span>✦</span>
+            <h1>ALL PRODUCTS</h1>
+            <p>เลือกกลิ่นและบรรยากาศที่เหมาะกับพื้นที่ของคุณ</p>
+        </div>
+
+        <div class="category-filter">
+
+            <a
+                href="{% url 'products:product_list' %}"
+                class="{% if not selected_category %}active{% endif %}"
+            >
+                ทั้งหมด
+            </a>
+
+            {% for category in categories %}
+                <a
+                    href="{% url 'products:product_list' %}?category={{ category.slug }}"
+                    class="{% if selected_category == category.slug %}active{% endif %}"
+                >
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+
+        </div>
+
+        <div class="product-grid">
+
+            {% for product in page_obj %}
+                {% include "includes/product-card.html" %}
+            {% empty %}
+                <p class="empty-message">
+                    ยังไม่มีสินค้าในหมวดนี้
+                </p>
+            {% endfor %}
+
+        </div>
+
+        {% if page_obj.paginator.num_pages > 1 %}
+        <nav class="pagination">
+
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+                    ก่อนหน้า
+                </a>
+            {% endif %}
+
+            <span>
+                หน้า {{ page_obj.number }}
+                จาก {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}">
+                    ถัดไป
+                </a>
+            {% endif %}
+
+        </nav>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

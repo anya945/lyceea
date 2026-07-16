@@ -1,0 +1,20 @@
+ขอบคุณสำหรับคำสั่งซื้อจาก ÉLYSIA
+
+เลขที่คำสั่งซื้อ: {{ order.order_number }}
+ผู้รับสินค้า: {{ order.recipient_name }}
+ยอดสุทธิ: {{ order.grand_total|floatformat:2 }} บาท
+วิธีชำระเงิน: {{ order.get_payment_method_display }}
+สถานะคำสั่งซื้อ: {{ order.get_order_status_display }}
+
+รายการสินค้า:
+{% for item in order.items.all %}
+- {{ item.product.name }} จำนวน {{ item.quantity }} ชิ้น
+  รวม {{ item.line_total|floatformat:2 }} บาท
+{% endfor %}
+
+{% if order_detail_url %}
+ดูรายละเอียดคำสั่งซื้อ:
+{{ order_detail_url }}
+{% endif %}
+
+ขอบคุณที่ไว้วางใจ ÉLYSIA

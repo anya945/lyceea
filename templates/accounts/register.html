@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}
+สมัครสมาชิก | ÉLYSIA
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <p class="auth-eyebrow">ÉLYSIA MEMBER</p>
+
+                <h1>สมัครสมาชิก</h1>
+
+                <p>
+                    สร้างบัญชีเพื่อจัดการคำสั่งซื้อ
+                    และติดตามสถานะสินค้าได้สะดวกยิ่งขึ้น
+                </p>
+            </div>
+
+            <form method="post" class="auth-form" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-alert form-alert-error">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">
+                        ชื่อผู้ใช้งาน
+                    </label>
+
+                    {{ form.username }}
+
+                    <small class="form-help">
+                        ใช้ตัวอักษรภาษาอังกฤษ ตัวเลข และเครื่องหมาย
+                        @ . + - _
+                    </small>
+
+                    {% for error in form.username.errors %}
+                        <p class="form-error">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">
+                        อีเมล
+                    </label>
+
+                    {{ form.email }}
+
+                    <small class="form-help">
+                        ใช้อีเมลสำหรับยืนยันตัวตนและรับข้อมูลคำสั่งซื้อ
+                    </small>
+
+                    {% for error in form.email.errors %}
+                        <p class="form-error">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">
+                        รหัสผ่าน
+                    </label>
+
+                    {{ form.password1 }}
+
+                    <ul class="form-help-list">
+                        <li>รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</li>
+                        <li>ไม่ควรคล้ายกับชื่อผู้ใช้งานหรือข้อมูลส่วนตัว</li>
+                        <li>ไม่ควรเป็นรหัสผ่านที่คาดเดาได้ง่าย</li>
+                        <li>ไม่ควรเป็นตัวเลขทั้งหมด</li>
+                    </ul>
+
+                    {% for error in form.password1.errors %}
+                        <p class="form-error">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">
+                        ยืนยันรหัสผ่าน
+                    </label>
+
+                    {{ form.password2 }}
+
+                    <small class="form-help">
+                        กรุณากรอกรหัสผ่านเดิมอีกครั้งเพื่อยืนยัน
+                    </small>
+
+                    {% for error in form.password2.errors %}
+                        <p class="form-error">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn auth-submit">
+                    สมัครสมาชิก
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    มีบัญชีอยู่แล้ว?
+                    <a href="#">เข้าสู่ระบบ</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
