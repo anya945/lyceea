@@ -14,7 +14,12 @@ from pathlib import Path
 # บังคับให้ email ที่ charset เป็น utf-8 ใช้ 8bit encoding แทน quoted-printable
 # ป้องกันไม่ให้ URL ยาวๆ (เช่น ลิงก์ reset password) ถูกตัดกลางบรรทัดด้วย "="
 # ซึ่งทำให้ token เพี้ยนตอน copy ลิงก์จากไฟล์ .log ไปวางใน browser
-email.charset.add_charset("utf-8", email.charset.SHORTEST, None, "utf-8")
+email.charset.add_charset(
+    "utf-8",
+    email.charset.SHORTEST,
+    None,
+    "utf-8",
+)
 
 
 # Base directory
@@ -22,19 +27,16 @@ email.charset.add_charset("utf-8", email.charset.SHORTEST, None, "utf-8")
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Development security
+# Security
 
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    (
-        "django-insecure-+j$bt^)3x_dahuhy$zdop5dw%30fkb1h"
-        "*!w#5@x$+$p@f%g9-4"
-    ),
-)
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY:
+    raise RuntimeError("DJANGO_SECRET_KEY is not configured")
 
 DEBUG = os.getenv(
     "DJANGO_DEBUG",
-    "True",
+    "False",
 ).lower() == "true"
 
 ALLOWED_HOSTS = [
@@ -44,6 +46,15 @@ ALLOWED_HOSTS = [
         "127.0.0.1,localhost",
     ).split(",")
     if host.strip()
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "",
+    ).split(",")
+    if origin.strip()
 ]
 
 
@@ -160,6 +171,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -183,8 +196,8 @@ LOGOUT_REDIRECT_URL = "products:home"
 
 # Email
 #
-# ค่าเริ่มต้นใช้ Console Backend:
-# อีเมลจะปรากฏใน Terminal โดยยังไม่ส่งออกจริง
+# ค่าเริ่มต้นใช้ File-based Backend:
+# อีเมลจะถูกบันทึกเป็นไฟล์ในโฟลเดอร์ sent_emails
 #
 # เมื่อต้องการส่งจริง ให้ตั้ง Environment Variables:
 # EMAIL_BACKEND
@@ -192,8 +205,9 @@ LOGOUT_REDIRECT_URL = "products:home"
 # EMAIL_HOST_PASSWORD
 # DEFAULT_FROM_EMAIL
 
-EMAIL_BACKEND = (
-    "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = os.getenv(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.filebased.EmailBackend",
 )
 
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
@@ -232,7 +246,7 @@ EMAIL_HOST_PASSWORD = os.getenv(
 
 DEFAULT_FROM_EMAIL = os.getenv(
     "DEFAULT_FROM_EMAIL",
-    "ÉLYSIA <no-reply@elysia.local>",
+    "Lyceea <no-reply@lyceea.com>",
 )
 
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
