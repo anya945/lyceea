@@ -347,7 +347,7 @@ body {
 /* Sprint 2.2 Hero Real Image */
 .hero-real {
     min-height: 520px;
-    background-image: url("../images/hero/hero-main.png");
+    background-image: url("../images/hero/hero-main.webp");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -399,7 +399,7 @@ body {
     min-height: 720px;
     background:
         linear-gradient(90deg, rgba(250,246,240,0.95), rgba(250,246,240,0.55)),
-        url("../images/hero/hero-main.png");
+        url("../images/hero/hero-main.webp");
     background-size: cover;
     background-position: center;
     display: flex;
@@ -469,7 +469,7 @@ body {
     background:
         radial-gradient(circle at 80% 45%, rgba(200,154,91,0.18), transparent 28%),
         linear-gradient(90deg, rgba(250,246,240,0.98), rgba(250,246,240,0.82)),
-        url("../images/hero/hero-main.png");
+        url("../images/hero/hero-main.webp");
     background-size: cover;
     background-position: center;
     display: flex;
