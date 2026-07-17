@@ -12,7 +12,7 @@ body {
     font-size: 14px;
 }
 
-.elysia-navbar {
+.lyceea-navbar {
     background: #fffaf4;
     border-bottom: 1px solid #eadfce;
     padding: 18px 0;
@@ -296,13 +296,13 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-.elysia-navbar {
+.lyceea-navbar {
     background: #fffaf4;
     padding: 18px 0;
     border-bottom: 1px solid #eadfce;
 }
 
-.elysia-navbar .container {
+.lyceea-navbar .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2673,4 +2673,16 @@ grid-template-columns:repeat(2,1fr);
     .password-form-card {
         padding: 22px 18px;
     }
+}
+
+.navbar-logo {
+    height: 72px;
+    width: auto;
+    display: block;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    padding: 0;
 }

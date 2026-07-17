@@ -1,118 +1,148 @@
 {% load static %}
 
-<nav class="navbar navbar-expand-lg elysia-navbar">
+<nav class="navbar navbar-expand-lg lyceea-navbar">
     <div class="container">
 
         <a
-            class="navbar-brand brand-logo"
-            href="{% url 'products:home' %}"
+    class="navbar-brand brand-logo"
+    href="{% url 'products:home' %}"
+    aria-label="Lyceea Home"
+>
+    <img
+        src="{% static 'images/brand/logo.png' %}"
+        alt="Lyceea"
+        class="navbar-logo"
+    >
+    </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
         >
-            ÉLYSIA
-            <span>BOTANICAL CANDLE</span>
-        </a>
+            ☰
+        </button>
 
-        <div class="navbar-menu">
-            <a href="{% url 'products:home' %}">
-                หน้าแรก
-            </a>
+        <div
+            class="collapse navbar-collapse justify-content-between"
+            id="navbarMenu"
+        >
 
-            <a href="{% url 'products:product_list' %}">
-                สินค้า
-            </a>
+            <div class="navbar-menu mx-auto">
 
-            <a href="#">
-                คอลเลกชัน
-            </a>
+                <a href="{% url 'products:home' %}">
+                    หน้าแรก
+                </a>
 
-            <a href="#">
-                เกี่ยวกับเรา
-            </a>
+                <a href="{% url 'products:product_list' %}">
+                    สินค้า
+                </a>
 
-            <a href="#">
-                รีวิว
-            </a>
+                <a href="#">
+                    คอลเลกชัน
+                </a>
 
-            <a href="#">
-                บทความ
-            </a>
+                <a href="#">
+                    เกี่ยวกับเรา
+                </a>
 
-            <a href="#">
-                ติดต่อเรา
-            </a>
-        </div>
+                <a href="#">
+                    รีวิว
+                </a>
 
-        <div class="navbar-icons">
+                <a href="#">
+                    บทความ
+                </a>
 
-            <a
-                href="{% url 'products:product_search' %}"
-                aria-label="ค้นหาสินค้า"
-                title="ค้นหาสินค้า"
-            >
-                <span>⌕</span>
-            </a>
+                <a href="#">
+                    ติดต่อเรา
+                </a>
 
-            <a
-                class="navbar-wishlist-link"
-                href="{% url 'products:wishlist' %}"
-                aria-label="รายการโปรด"
-                title="รายการโปรด"
-            >
-                <span>
-                    {% if wishlist_count %}
-                        ♥
-                    {% else %}
-                        ♡
-                    {% endif %}
-                </span>
+            </div>
 
-                {% if wishlist_count %}
-                    <small class="navbar-icon-count">
-                        {{ wishlist_count }}
-                    </small>
-                {% endif %}
-            </a>
+            <div class="navbar-icons">
 
-            <a
-                class="navbar-cart-link"
-                href="{% url 'products:cart_detail' %}"
-                aria-label="ตะกร้าสินค้า"
-                title="ตะกร้าสินค้า"
-            >
-                <span>🛍️</span>
-
-                {% if cart_count %}
-                    <small class="navbar-icon-count">
-                        {{ cart_count }}
-                    </small>
-                {% endif %}
-            </a>
-
-            {% if user.is_authenticated %}
-                <form
-                    method="post"
-                    action="{% url 'accounts:logout' %}"
-                    class="logout-form"
+                <a
+                    href="{% url 'products:product_search' %}"
+                    aria-label="ค้นหาสินค้า"
+                    title="ค้นหาสินค้า"
                 >
-                    {% csrf_token %}
+                    <span>⌕</span>
+                </a>
 
-                    <button
-                        type="submit"
-                        class="nav-icon-button"
-                        aria-label="ออกจากระบบ"
-                        title="ออกจากระบบ"
+                <a
+                    class="navbar-wishlist-link"
+                    href="{% url 'products:wishlist' %}"
+                    aria-label="รายการโปรด"
+                    title="รายการโปรด"
+                >
+                    <span>
+                        {% if wishlist_count %}
+                            ♥
+                        {% else %}
+                            ♡
+                        {% endif %}
+                    </span>
+
+                    {% if wishlist_count %}
+                        <small class="navbar-icon-count">
+                            {{ wishlist_count }}
+                        </small>
+                    {% endif %}
+                </a>
+
+                <a
+                    class="navbar-cart-link"
+                    href="{% url 'products:cart_detail' %}"
+                    aria-label="ตะกร้าสินค้า"
+                    title="ตะกร้าสินค้า"
+                >
+                    <span>🛍️</span>
+
+                    {% if cart_count %}
+                        <small class="navbar-icon-count">
+                            {{ cart_count }}
+                        </small>
+                    {% endif %}
+                </a>
+
+                {% if user.is_authenticated %}
+
+                    <form
+                        method="post"
+                        action="{% url 'accounts:logout' %}"
+                        class="logout-form"
+                    >
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="nav-icon-button"
+                            aria-label="ออกจากระบบ"
+                            title="ออกจากระบบ"
+                        >
+                            <span>♙</span>
+                        </button>
+
+                    </form>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'accounts:login' %}"
+                        aria-label="เข้าสู่ระบบ"
+                        title="เข้าสู่ระบบ"
                     >
                         <span>♙</span>
-                    </button>
-                </form>
-            {% else %}
-                <a
-                    href="{% url 'accounts:login' %}"
-                    aria-label="เข้าสู่ระบบ"
-                    title="เข้าสู่ระบบ"
-                >
-                    <span>♙</span>
-                </a>
-            {% endif %}
+                    </a>
+
+                {% endif %}
+
+            </div>
 
         </div>
 

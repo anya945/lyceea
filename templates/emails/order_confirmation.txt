@@ -20,7 +20,7 @@
                 letter-spacing:3px;
                 color:#9a765e;
             ">
-                ÉLYSIA
+                Lyceea
             </p>
 
             <h1 style="

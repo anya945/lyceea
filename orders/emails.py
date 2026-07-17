@@ -27,7 +27,7 @@ def send_order_confirmation(
         }
 
         subject = (
-            f"ยืนยันคำสั่งซื้อ {order.order_number} | ÉLYSIA"
+            f"ยืนยันคำสั่งซื้อ {order.order_number} | Lyceea"
         )
 
         text_body = render_to_string(
