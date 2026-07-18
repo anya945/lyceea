@@ -9,19 +9,7 @@ Disallow: /checkout/
 Disallow: /cart/
 Disallow: /wishlist/
 Disallow: /order-success/
-User-agent: *
-Allow: /
-
-Disallow: /admin/
-Disallow: /accounts/login/
-Disallow: /accounts/register/
-Disallow: /accounts/logout/
-Disallow: /checkout/
-Disallow: /cart/
-Disallow: /wishlist/
-Disallow: /order-success/
 Disallow: /media/
 Disallow: /static/
 
-Sitemap: https://lyceea.com/sitemap.xml
 Sitemap: https://lyceea.com/sitemap.xml
