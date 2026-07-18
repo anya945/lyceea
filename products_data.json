@@ -1,0 +1,94 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "Scented Candle",
+    "slug": "scented-candle",
+    "description": "เทียนหอมระดับพรีเมียมสำหรับสร้างบรรยากาศที่อบอุ่น ผ่อนคลาย และหรูหราภายในบ้าน",
+    "image": "",
+    "is_active": true,
+    "created_at": "2026-07-10T14:18:46.361Z",
+    "updated_at": "2026-07-10T14:18:46.361Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Reed Diffuser",
+    "slug": "reed-diffuser",
+    "description": "ก้านไม้หอมสำหรับกระจายกลิ่นอย่างต่อเนื่อง เหมาะสำหรับห้องนอน ห้องนั่งเล่น และพื้นที่ภายในบ้าน",
+    "image": "",
+    "is_active": true,
+    "created_at": "2026-07-10T14:19:06.843Z",
+    "updated_at": "2026-07-10T14:19:06.843Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "name": "Elysian Vanilla Candle",
+    "slug": "elysian-vanilla-candle",
+    "sku": "ELY-CAN-0001",
+    "short_description": "เทียนหอมกลิ่นวานิลลานุ่มละมุน ให้บรรยากาศอบอุ่นและผ่อนคลาย",
+    "description": "เทียนหอม Elysian Vanilla Candle โดดเด่นด้วยกลิ่นวานิลลาที่นุ่มลึก ผสานความหอมอบอุ่น เหมาะสำหรับสร้างบรรยากาศภายในห้องนอน ห้องนั่งเล่น หรือช่วงเวลาพักผ่อน",
+    "seo_title": "",
+    "meta_description": "",
+    "price": "990.00",
+    "discount_price": "890.00",
+    "stock": 42,
+    "is_featured": true,
+    "is_best_seller": true,
+    "is_active": true,
+    "created_at": "2026-07-10T14:21:01.966Z",
+    "updated_at": "2026-07-10T14:54:08.053Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "category": 2,
+    "name": "White Tea Reed Diffuser",
+    "slug": "white-tea-reed-diffuser",
+    "sku": "ELY-REE-0001",
+    "short_description": "ก้านไม้หอมกลิ่นไวท์ที สะอาด สดชื่น และให้ความรู้สึกสงบ",
+    "description": "White Tea Reed Diffuser ให้กลิ่นหอมสะอาดและนุ่มนวล เหมาะสำหรับพื้นที่ที่ต้องการบรรยากาศผ่อนคลาย พร้อมกระจายกลิ่นได้อย่างต่อเนื่องโดยไม่ต้องใช้ไฟ",
+    "seo_title": "",
+    "meta_description": "",
+    "price": "1290.00",
+    "discount_price": null,
+    "stock": 2,
+    "is_featured": true,
+    "is_best_seller": false,
+    "is_active": true,
+    "created_at": "2026-07-10T14:51:09.288Z",
+    "updated_at": "2026-07-11T12:22:54.124Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 2,
+  "fields": {
+    "product": 3,
+    "image": "products/product-13.jpg",
+    "alt_text": "White Tea Reed Diffuser",
+    "is_primary": true,
+    "sort_order": 1
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 3,
+  "fields": {
+    "product": 1,
+    "image": "products/product-03.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "sort_order": 0
+  }
+}
+]
