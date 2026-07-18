@@ -2,8 +2,148 @@
 {% load static %}
 
 {% block title %}
+{% if product.seo_title %}
+{{ product.seo_title }}
+{% else %}
 {{ product.name }} | Lyceea
+{% endif %}
 {% endblock %}
+
+{% block meta_description %}
+<meta
+    name="description"
+    content="{% if product.meta_description %}{{ product.meta_description }}{% elif product.short_description %}{{ product.short_description }}{% else %}{{ product.name }} จาก Lyceea เทียนหอมพรีเมียมสำหรับบ้านและของขวัญ{% endif %}"
+>
+{% endblock %}
+
+{% block canonical_url %}
+<link
+    rel="canonical"
+    href="{{ request.build_absolute_uri }}"
+>
+{% endblock %}
+
+{% block social_metadata %}
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Lyceea">
+<meta property="og:locale" content="th_TH">
+
+<meta
+    property="og:title"
+    content="{% if product.seo_title %}{{ product.seo_title }}{% else %}{{ product.name }} | Lyceea{% endif %}"
+>
+
+<meta
+    property="og:description"
+    content="{% if product.meta_description %}{{ product.meta_description }}{% elif product.short_description %}{{ product.short_description }}{% else %}{{ product.name }} จาก Lyceea เทียนหอมพรีเมียมสำหรับบ้านและของขวัญ{% endif %}"
+>
+
+<meta
+    property="og:url"
+    content="{{ request.build_absolute_uri }}"
+>
+
+{% if primary_image %}
+<meta
+    property="og:image"
+    content="{{ request.scheme }}://{{ request.get_host }}{{ primary_image.image.url }}"
+>
+<meta
+    property="og:image:alt"
+    content="{{ primary_image.alt_text|default:product.name }}"
+>
+{% else %}
+<meta
+    property="og:image"
+    content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/og/lyceea-default.jpg' %}"
+>
+<meta
+    property="og:image:alt"
+    content="{{ product.name }}"
+>
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta
+    name="twitter:title"
+    content="{% if product.seo_title %}{{ product.seo_title }}{% else %}{{ product.name }} | Lyceea{% endif %}"
+>
+
+<meta
+    name="twitter:description"
+    content="{% if product.meta_description %}{{ product.meta_description }}{% elif product.short_description %}{{ product.short_description }}{% else %}{{ product.name }} จาก Lyceea เทียนหอมพรีเมียมสำหรับบ้านและของขวัญ{% endif %}"
+>
+
+{% if primary_image %}
+<meta
+    name="twitter:image"
+    content="{{ request.scheme }}://{{ request.get_host }}{{ primary_image.image.url }}"
+>
+{% else %}
+<meta
+    name="twitter:image"
+    content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/og/lyceea-default.jpg' %}"
+>
+{% endif %}
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "{{ product.name|escapejs }}",
+    "description": "{% if product.meta_description %}{{ product.meta_description|escapejs }}{% elif product.short_description %}{{ product.short_description|escapejs }}{% else %}{{ product.description|striptags|truncatechars:155|escapejs }}{% endif %}",
+    "sku": "{{ product.sku|escapejs }}",
+    "url": "{{ request.build_absolute_uri|escapejs }}",
+    {% if primary_image %}
+    "image": "{{ request.scheme }}://{{ request.get_host }}{{ primary_image.image.url|escapejs }}",
+    {% endif %}
+    "brand": {
+        "@type": "Brand",
+        "name": "Lyceea"
+    },
+    "offers": {
+        "@type": "Offer",
+        "url": "{{ request.build_absolute_uri|escapejs }}",
+        "priceCurrency": "THB",
+        "price": "{% if product.discount_price %}{{ product.discount_price }}{% else %}{{ product.price }}{% endif %}",
+        "availability": "{% if product.stock > 0 %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "itemCondition": "https://schema.org/NewCondition"
+    }
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "หน้าแรก",
+            "item": "{{ request.scheme }}://{{ request.get_host }}/"
+        },
+
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "สินค้า",
+            "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'products:product_list' %}"
+        },
+
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ product.name|escapejs }}",
+            "item": "{{ request.build_absolute_uri }}"
+        }
+
+    ]
+}
+</script>
+{% endblock social_metadata %}
 
 {% block content %}
 
@@ -26,25 +166,21 @@
 
             <div class="product-gallery">
 
-                {% with primary_image=product.images.first %}
-                    <div class="main-product-image">
-
-                        {% if primary_image %}
-                            <img
-                                id="main-product-image"
-                                src="{{ primary_image.image.url }}"
-                                alt="{{ primary_image.alt_text|default:product.name }}"
-                            >
-                        {% else %}
-                            <img
-                                id="main-product-image"
-                                src="{% static 'images/products/product-01.jpg' %}"
-                                alt="{{ product.name }}"
-                            >
-                        {% endif %}
-
-                    </div>
-                {% endwith %}
+                <div class="main-product-image">
+                    {% if primary_image %}
+                        <img
+                            id="main-product-image"
+                            src="{{ primary_image.image.url }}"
+                            alt="{{ primary_image.alt_text|default:product.name }}"
+                        >
+                    {% else %}
+                        <img
+                            id="main-product-image"
+                            src="{% static 'images/products/product-01.jpg' %}"
+                            alt="{{ product.name }}"
+                        >
+                    {% endif %}
+                </div>
 
                 {% if product.images.all %}
                     <div class="product-thumbnails">
@@ -52,7 +188,7 @@
                         {% for image in product.images.all %}
                             <button
                                 type="button"
-                                class="thumbnail-btn{% if forloop.first %} active{% endif %}"
+                                class="thumbnail-btn{% if primary_image and image.id == primary_image.id %} active{% endif %}"
                                 data-image-url="{{ image.image.url }}"
                                 aria-label="ดูรูป {{ forloop.counter }} ของ {{ product.name }}"
                             >
@@ -210,66 +346,53 @@
                     </form>
 
                     <form
-    action="{% url 'products:toggle_wishlist' product.id %}"
-    method="post"
-    class="product-detail-wishlist-form"
->
-    {% csrf_token %}
+                        action="{% url 'products:toggle_wishlist' product.id %}"
+                        method="post"
+                        class="product-detail-wishlist-form"
+                    >
+                        {% csrf_token %}
 
-    <input
-        type="hidden"
-        name="next"
-        value="{{ request.get_full_path }}"
-    >
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
 
-    <button
-        type="submit"
-        class="
-            product-detail-wishlist-btn
-            {% if product.id in wishlist_ids %}
-                active
-            {% endif %}
-        "
-        aria-label="
-            {% if product.id in wishlist_ids %}
-                ลบ {{ product.name }} ออกจากรายการโปรด
-            {% else %}
-                เพิ่ม {{ product.name }} ในรายการโปรด
-            {% endif %}
-        "
-    >
+                        <button
+                            type="submit"
+                            class="product-detail-wishlist-btn{% if product.id in wishlist_ids %} active{% endif %}"
+                            aria-label="{% if product.id in wishlist_ids %}ลบ {{ product.name }} ออกจากรายการโปรด{% else %}เพิ่ม {{ product.name }} ในรายการโปรด{% endif %}"
+                        >
+                            <svg
+                                class="wishlist-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="
+                                        M20.8 4.6
+                                        a5.5 5.5 0 0 0-7.8 0
+                                        L12 5.7
+                                        l-1.1-1.1
+                                        a5.5 5.5 0 0 0-7.8 7.8
+                                    L12 21
+                                        l8.8-8.6
+                                        a5.5 5.5 0 0 0 0-7.8
+                                        Z
+                                    "
+                                />
+                            </svg>
 
-        <svg
-            class="wishlist-icon"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-            <path
-                d="
-                    M20.8 4.6
-                    a5.5 5.5 0 0 0-7.8 0
-                    L12 5.7
-                    l-1.1-1.1
-                    a5.5 5.5 0 0 0-7.8 7.8
-                    L12 21
-                    l8.8-8.6
-                    a5.5 5.5 0 0 0 0-7.8
-                    Z
-                "
-            />
-        </svg>
+                            <span>
+                                {% if product.id in wishlist_ids %}
+                                    ลบจากรายการโปรด
+                                {% else %}
+                                    เพิ่มในรายการโปรด
+                                {% endif %}
+                            </span>
+                        </button>
+                    </form>
 
-        <span>
-            {% if product.id in wishlist_ids %}
-                ลบจากรายการโปรด
-            {% else %}
-                เพิ่มในรายการโปรด
-            {% endif %}
-        </span>
-
-    </button>
-
-</form>
                 </div>
 
                 <div class="product-description-block">

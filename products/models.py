@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -53,6 +54,24 @@ class Product(models.Model):
     )
     description = models.TextField(blank=True)
 
+    seo_title = models.CharField(
+        max_length=60,
+        blank=True,
+        help_text=(
+            "ชื่อที่แสดงบน Google ไม่เกิน 60 ตัวอักษร "
+            "หากเว้นว่าง ระบบจะใช้ชื่อสินค้า"
+        ),
+    )
+
+    meta_description = models.CharField(
+        max_length=155,
+        blank=True,
+        help_text=(
+            "คำอธิบายสำหรับผลการค้นหา Google "
+            "ไม่เกิน 155 ตัวอักษร"
+        ),
+    )
+    
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2
@@ -73,6 +92,8 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Product'
@@ -83,6 +104,12 @@ class Product(models.Model):
             self.slug = slugify(self.name)
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+        "products:product_detail",
+        kwargs={"slug": self.slug},
+    )
 
     def __str__(self):
         return self.name

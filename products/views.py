@@ -131,6 +131,15 @@ def product_detail(request, slug):
         is_active=True,
     )
 
+    primary_image = (
+        product.images
+        .filter(is_primary=True)
+        .first()
+    )
+
+    if primary_image is None:
+        primary_image = product.images.first()
+
     related_products = (
         Product.objects
         .filter(
@@ -158,6 +167,7 @@ def product_detail(request, slug):
     context = {
         "product": product,
         "related_products": related_products,
+        "primary_image": primary_image,
         "wishlist_ids": wishlist_ids,
     }
 
@@ -166,7 +176,6 @@ def product_detail(request, slug):
         "products/product-detail.html",
         context,
     )
-
 
 def product_search(request):
     query = request.GET.get(

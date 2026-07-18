@@ -85,6 +85,8 @@ class ProductAdmin(admin.ModelAdmin):
         'sku',
         'short_description',
         'description',
+        'seo_title',
+        'meta_description',
     )
 
     prepopulated_fields = {
@@ -133,6 +135,21 @@ class ProductAdmin(admin.ModelAdmin):
                 )
             },
         ),
+        
+                (
+            'SEO และข้อมูลสำหรับ Google',
+            {
+                'fields': (
+                    'seo_title',
+                    'meta_description',
+                ),
+                'description': (
+                    'SEO Title ไม่เกิน 60 ตัวอักษร และ '
+                    'Meta Description ไม่เกิน 155 ตัวอักษร'
+                ),
+            },
+        ),
+        
         (
             'ราคาและสต็อก',
             {
