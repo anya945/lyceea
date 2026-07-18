@@ -20,7 +20,9 @@ logs/
 
 # Django
 staticfiles/
-media/
+media/*
+!media/products/
+!media/products/**
 
 # IDE
 .vscode/
