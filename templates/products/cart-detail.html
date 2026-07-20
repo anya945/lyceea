@@ -57,6 +57,16 @@
                                     SKU: {{ item.product.sku }}
                                 </p>
 
+                                <p class="cart-stock-status">
+                                    {% if item.product.stock <= 0 %}
+                                        สินค้าหมด
+                                    {% elif item.product.stock <= 5 %}
+                                        เหลือเพียง {{ item.product.stock }} ชิ้น
+                                    {% else %}
+                                        คงเหลือ {{ item.product.stock }} ชิ้น
+                                    {% endif %}
+                                </p>
+
                                 <div class="cart-item-price">
                                     ฿{{ item.price|floatformat:0 }}
                                 </div>
@@ -77,11 +87,13 @@
                                     </label>
 
                                     <div class="quantity-selector">
+
                                         <button
                                             type="button"
                                             class="quantity-btn"
                                             data-action="decrease"
                                             data-target="quantity-{{ item.product.id }}"
+                                            {% if item.quantity <= 1 %}disabled{% endif %}
                                         >
                                             −
                                         </button>
@@ -100,17 +112,21 @@
                                             class="quantity-btn"
                                             data-action="increase"
                                             data-target="quantity-{{ item.product.id }}"
+                                            {% if item.quantity >= item.product.stock %}disabled{% endif %}
                                         >
                                             +
                                         </button>
+
                                     </div>
 
                                     <button
                                         type="submit"
                                         class="cart-update-btn"
+                                        {% if item.product.stock <= 0 %}disabled{% endif %}
                                     >
                                         อัปเดต
                                     </button>
+
                                 </form>
 
                                 <div class="cart-line-total">
@@ -170,11 +186,11 @@
                     </div>
 
                     <a
-    href="{% url 'products:checkout' %}"
-    class="checkout-btn"
->
-    ดำเนินการชำระเงิน
-</a>
+                        href="{% url 'products:checkout' %}"
+                        class="checkout-btn"
+                    >
+                        ดำเนินการชำระเงิน
+                    </a>
 
                     <a
                         href="{% url 'products:product_list' %}"
@@ -226,7 +242,7 @@
                 }
 
                 const minimum = Number(input.min) || 1;
-                const maximum = Number(input.max) || 999;
+                const maximum = Number(input.max) || 1;
                 let value = Number(input.value) || minimum;
 
                 if (button.dataset.action === 'increase') {
@@ -235,6 +251,43 @@
                     value = Math.max(value - 1, minimum);
                 }
 
+                input.value = value;
+
+                const form = button.closest('.cart-quantity-form');
+
+                if (!form) {
+                    return;
+                }
+
+                const decreaseButton = form.querySelector(
+                    '[data-action="decrease"]'
+                );
+
+                const increaseButton = form.querySelector(
+                    '[data-action="increase"]'
+                );
+
+                if (decreaseButton) {
+                    decreaseButton.disabled = value <= minimum;
+                }
+
+                if (increaseButton) {
+                    increaseButton.disabled = value >= maximum;
+                }
+            });
+        });
+
+        const quantityInputs = document.querySelectorAll(
+            '.cart-quantity-form input[type="number"]'
+        );
+
+        quantityInputs.forEach(function (input) {
+            input.addEventListener('change', function () {
+                const minimum = Number(input.min) || 1;
+                const maximum = Number(input.max) || minimum;
+                let value = Number(input.value) || minimum;
+
+                value = Math.max(minimum, Math.min(value, maximum));
                 input.value = value;
             });
         });

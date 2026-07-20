@@ -1,7 +1,11 @@
 from datetime import date
+from io import BytesIO
+from pathlib import Path
 
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db import models
+from PIL import Image, ImageOps
 
 from products.models import Product
 
@@ -55,7 +59,6 @@ class Order(models.Model):
             PAYMENT_STATUS_REFUNDED,
             "คืนเงินแล้ว",
         ),
-
     ]
 
     ORDER_STATUS_CHOICES = [
@@ -143,13 +146,12 @@ class Order(models.Model):
         upload_to="payment_slips/%Y/%m/",
         blank=True,
         null=True,
-     )
+    )
 
     payment_submitted_at = models.DateTimeField(
         blank=True,
-        null=True,    
+        null=True,
     )
-
 
     order_status = models.CharField(
         max_length=20,
@@ -175,6 +177,80 @@ class Order(models.Model):
     def __str__(self):
         return self.order_number
 
+    def _resize_payment_slip(self):
+        if not self.payment_slip:
+            return
+
+        if getattr(self.payment_slip, "_committed", True):
+            return
+
+        self.payment_slip.file.seek(0)
+
+        with Image.open(self.payment_slip.file) as image:
+            image = ImageOps.exif_transpose(image)
+
+            maximum_dimension = 1600
+
+            if (
+                image.width > maximum_dimension
+                or image.height > maximum_dimension
+            ):
+                image.thumbnail(
+                    (
+                        maximum_dimension,
+                        maximum_dimension,
+                    ),
+                    Image.Resampling.LANCZOS,
+                )
+
+            if image.mode in ("RGBA", "LA"):
+                background = Image.new(
+                    "RGB",
+                    image.size,
+                    "white",
+                )
+
+                alpha_channel = image.getchannel("A")
+
+                background.paste(
+                    image.convert("RGB"),
+                    mask=alpha_channel,
+                )
+
+                image = background
+
+            elif image.mode != "RGB":
+                image = image.convert("RGB")
+
+            output = BytesIO()
+            target_size = 5 * 1024 * 1024
+            quality_levels = (85, 75, 65)
+
+            for quality in quality_levels:
+                output.seek(0)
+                output.truncate(0)
+
+                image.save(
+                    output,
+                    format="JPEG",
+                    quality=quality,
+                    optimize=True,
+                )
+
+                if output.tell() <= target_size:
+                    break
+
+            original_name = Path(
+                self.payment_slip.name
+            ).stem
+
+            resized_name = f"{original_name}.jpg"
+
+            self.payment_slip = ContentFile(
+                output.getvalue(),
+                name=resized_name,
+            )
+
     def save(self, *args, **kwargs):
         if not self.order_number:
             today = date.today().strftime("%Y%m%d")
@@ -199,6 +275,8 @@ class Order(models.Model):
             self.order_number = (
                 f"ELY{today}{running:04d}"
             )
+
+        self._resize_payment_slip()
 
         super().save(*args, **kwargs)
 

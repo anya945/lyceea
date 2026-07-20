@@ -65,14 +65,51 @@
 
             </div>
 
-            <p>
+            <p class="mt-4">
                 วิธีชำระเงิน:
                 <strong>{{ order.payment_method }}</strong>
             </p>
 
-            <a href="{% url 'products:product_list' %}">
-                กลับไปเลือกซื้อสินค้า
-            </a>
+            {% if order.payment_method_code != "COD" %}
+
+                <div class="d-grid gap-3 mt-4">
+
+                    <a
+                        href="{% url 'orders:payment' order.order_number %}"
+                        class="btn auth-submit"
+                    >
+                        ไปหน้าชำระเงินและอัปโหลดสลิป
+                    </a>
+
+                    <a
+                        href="{% url 'orders:order_detail' order.order_number %}"
+                        class="btn btn-outline-dark"
+                    >
+                        ดูรายละเอียดคำสั่งซื้อ
+                    </a>
+
+                </div>
+
+            {% else %}
+
+                <div class="d-grid mt-4">
+
+                    <a
+                        href="{% url 'orders:order_detail' order.order_number %}"
+                        class="btn auth-submit"
+                    >
+                        ดูรายละเอียดคำสั่งซื้อ
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+            <div class="mt-4">
+                <a href="{% url 'products:product_list' %}">
+                    กลับไปเลือกซื้อสินค้า
+                </a>
+            </div>
 
         </div>
 
@@ -80,23 +117,3 @@
 </section>
 
 {% endblock %}
-
-{% if order.payment_method_code != "COD" %}
-    <div class="d-grid gap-3 mt-4">
-
-        <a
-            href="{% url 'orders:payment' order.order_number %}"
-            class="btn auth-submit"
-        >
-            ไปหน้าชำระเงินและอัปโหลดสลิป
-        </a>
-
-        <a
-            href="{% url 'orders:order_detail' order.order_number %}"
-            class="btn btn-outline-dark"
-        >
-            ดูรายละเอียดคำสั่งซื้อ
-        </a>
-
-    </div>
-{% endif %}

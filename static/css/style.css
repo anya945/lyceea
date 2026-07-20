@@ -791,6 +791,19 @@ body {
     background: #c89a5b;
 }
 
+.cart-stock-status {
+    margin: 6px 0 10px;
+    font-size: 13px;
+    color: #8a5a3b;
+    font-weight: 500;
+}
+
+.quantity-btn:disabled,
+.cart-update-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
 @media (max-width: 768px) {
     .product-grid {
         grid-template-columns: 1fr 1fr;

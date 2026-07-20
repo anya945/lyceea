@@ -4,16 +4,16 @@
     <div class="container">
 
         <a
-    class="navbar-brand brand-logo"
-    href="{% url 'products:home' %}"
-    aria-label="Lyceea Home"
->
-    <img
-        src="{% static 'images/brand/logo.png' %}"
-        alt="Lyceea"
-        class="navbar-logo"
-    >
-    </a>
+            class="navbar-brand brand-logo"
+            href="{% url 'products:home' %}"
+            aria-label="Lyceea Home"
+        >
+            <img
+                src="{% static 'images/brand/logo.png' %}"
+                alt="Lyceea"
+                class="navbar-logo"
+            >
+        </a>
 
         <button
             class="navbar-toggler"
@@ -112,6 +112,15 @@
 
                 {% if user.is_authenticated %}
 
+                    <a
+                        href="{% url 'accounts:profile' %}"
+                        class="nav-icon-link"
+                        aria-label="โปรไฟล์ของฉัน"
+                        title="โปรไฟล์ของฉัน"
+                    >
+                        <span>♙</span>
+                    </a>
+
                     <form
                         method="post"
                         action="{% url 'accounts:logout' %}"
@@ -125,9 +134,8 @@
                             aria-label="ออกจากระบบ"
                             title="ออกจากระบบ"
                         >
-                            <span>♙</span>
+                            <span>↪</span>
                         </button>
-
                     </form>
 
                 {% else %}

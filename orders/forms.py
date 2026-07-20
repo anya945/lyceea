@@ -44,11 +44,11 @@ class PaymentSlipForm(forms.ModelForm):
                 "รองรับเฉพาะไฟล์ JPG, PNG และ WEBP"
             )
 
-        maximum_size = 5 * 1024 * 1024
+        maximum_size = 20 * 1024 * 1024
 
         if payment_slip.size > maximum_size:
             raise forms.ValidationError(
-                "ไฟล์ต้องมีขนาดไม่เกิน 5 MB"
+                "ไฟล์ต้นฉบับต้องมีขนาดไม่เกิน 20 MB"
             )
 
         return payment_slip
