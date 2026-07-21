@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+บทความและแรงบันดาลใจ | Lyceea
+{% endblock %}
+
+{% block meta_description %}
+<meta
+    name="description"
+    content="อ่านบทความเกี่ยวกับเทียนหอม การดูแลเทียน การเลือกกลิ่น การตกแต่งบ้าน และแรงบันดาลใจจาก Lyceea"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+
+        <header class="text-center mb-5">
+            <p class="text-uppercase small mb-2">
+                Lyceea Journal
+            </p>
+
+            <h1 class="display-5 mb-3">
+                Stories, Inspiration & Fragrance
+            </h1>
+
+            <p class="lead mx-auto" style="max-width: 760px;">
+                ค้นพบแรงบันดาลใจ เคล็ดลับการดูแลเทียนหอม
+                และเรื่องราวเกี่ยวกับกลิ่นที่ช่วยเติมเต็มบรรยากาศภายในบ้าน
+            </p>
+        </header>
+
+        <nav
+            class="d-flex flex-wrap justify-content-center gap-2 mb-5"
+            aria-label="หมวดหมู่บทความ"
+        >
+            <span class="badge rounded-pill text-bg-dark px-3 py-2">
+                บทความทั้งหมด
+            </span>
+
+            <span class="badge rounded-pill border text-dark px-3 py-2">
+                Candle Care
+            </span>
+
+            <span class="badge rounded-pill border text-dark px-3 py-2">
+                Aromatherapy
+            </span>
+
+            <span class="badge rounded-pill border text-dark px-3 py-2">
+                Home Decoration
+            </span>
+
+            <span class="badge rounded-pill border text-dark px-3 py-2">
+                Gift Ideas
+            </span>
+
+            <span class="badge rounded-pill border text-dark px-3 py-2">
+                Behind the Brand
+            </span>
+        </nav>
+
+        <section class="row align-items-center g-5 mb-5">
+            <div class="col-lg-7">
+                <div
+                    class="ratio ratio-16x9 bg-light rounded overflow-hidden"
+                >
+                    <div
+                        class="d-flex align-items-center justify-content-center"
+                    >
+                        <span class="text-muted">
+                            Featured Article Image
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <p class="text-uppercase small mb-2">
+                    Featured Article
+                </p>
+
+                <h2 class="mb-3">
+                    วิธีดูแลเทียนหอมให้ใช้งานได้ยาวนาน
+                </h2>
+
+                <p class="text-muted mb-3">
+                    Candle Care
+                </p>
+
+                <p>
+                    เรียนรู้วิธีดูแลเทียนหอมตั้งแต่การจุดครั้งแรก
+                    การตัดไส้เทียน ไปจนถึงการดับเทียนอย่างเหมาะสม
+                    เพื่อช่วยให้เทียนเผาไหม้สม่ำเสมอและใช้งานได้นานขึ้น
+                </p>
+
+                <a
+                    href="{% url 'pages:blog_detail' %}"
+                    class="btn btn-dark px-4"
+                >
+                    อ่านบทความ
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-4">
+                <p class="text-uppercase small mb-2">
+                    Latest Stories
+                </p>
+
+                <h2>
+                    บทความล่าสุด
+                </h2>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-4">
+                    <article class="border rounded overflow-hidden h-100">
+                        <div class="ratio ratio-4x3 bg-light">
+                            <div
+                                class="d-flex align-items-center justify-content-center"
+                            >
+                                <span class="text-muted">
+                                    Article Image
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <p class="small text-muted mb-2">
+                                Candle Care
+                            </p>
+
+                            <h3 class="h5">
+                                วิธีจุดเทียนครั้งแรกอย่างถูกต้อง
+                            </h3>
+
+                            <p>
+                                การจุดเทียนครั้งแรกส่งผลต่อรูปแบบการเผาไหม้
+                                และอายุการใช้งานของเทียนในระยะยาว
+                            </p>
+
+                            <a
+                                href="{% url 'pages:blog_detail' %}"
+                                class="text-dark"
+                            >
+                                อ่านเพิ่มเติม
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <article class="border rounded overflow-hidden h-100">
+                        <div class="ratio ratio-4x3 bg-light">
+                            <div
+                                class="d-flex align-items-center justify-content-center"
+                            >
+                                <span class="text-muted">
+                                    Article Image
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <p class="small text-muted mb-2">
+                                Home Fragrance
+                            </p>
+
+                            <h3 class="h5">
+                                เลือกกลิ่นหอมให้เหมาะกับแต่ละห้อง
+                            </h3>
+
+                            <p>
+                                แต่ละพื้นที่ในบ้านมีบรรยากาศและวัตถุประสงค์
+                                ที่แตกต่างกัน การเลือกกลิ่นจึงควรแตกต่างกันด้วย
+                            </p>
+
+                            <a
+                                href="{% url 'pages:blog_detail' %}"
+                                class="text-dark"
+                            >
+                                อ่านเพิ่มเติม
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <article class="border rounded overflow-hidden h-100">
+                        <div class="ratio ratio-4x3 bg-light">
+                            <div
+                                class="d-flex align-items-center justify-content-center"
+                            >
+                                <span class="text-muted">
+                                    Article Image
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <p class="small text-muted mb-2">
+                                Materials
+                            </p>
+
+                            <h3 class="h5">
+                                ไขเทียนธรรมชาติแตกต่างอย่างไร
+                            </h3>
+
+                            <p>
+                                ทำความเข้าใจคุณสมบัติของไขเทียนชนิดต่าง ๆ
+                                และปัจจัยที่ส่งผลต่อการเผาไหม้และการกระจายกลิ่น
+                            </p>
+
+                            <a
+                                href="{% url 'pages:blog_detail' %}"
+                                class="text-dark"
+                            >
+                                อ่านเพิ่มเติม
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <article class="border rounded overflow-hidden h-100">
+                        <div class="ratio ratio-4x3 bg-light">
+                            <div
+                                class="d-flex align-items-center justify-content-center"
+                            >
+                                <span class="text-muted">
+                                    Article Image
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <p class="small text-muted mb-2">
+                                Candle Care
+                            </p>
+
+                            <h3 class="h5">
+                                ทำไมควรตัดไส้เทียนก่อนจุด
+                            </h3>
+
+                            <p>
+                                การตัดไส้เทียนอย่างเหมาะสมช่วยควบคุมเปลวไฟ
+                                ลดเขม่า และส่งเสริมการเผาไหม้ที่สม่ำเสมอ
+                            </p>
+
+                            <a
+                                href="{% url 'pages:blog_detail' %}"
+                                class="text-dark"
+                            >
+                                อ่านเพิ่มเติม
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <article class="border rounded overflow-hidden h-100">
+                        <div class="ratio ratio-4x3 bg-light">
+                            <div
+                                class="d-flex align-items-center justify-content-center"
+                            >
+                                <span class="text-muted">
+                                    Article Image
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <p class="small text-muted mb-2">
+                                Gift Ideas
+                            </p>
+
+                            <h3 class="h5">
+                                เทียนหอมสำหรับของขวัญในโอกาสพิเศษ
+                            </h3>
+
+                            <p>
+                                ค้นหาแนวทางเลือกกลิ่นและรูปแบบบรรจุภัณฑ์
+                                ให้เหมาะกับผู้รับและช่วงเวลาสำคัญ
+                            </p>
+
+                            <a
+                                href="{% url 'pages:blog_detail' %}"
+                                class="text-dark"
+                            >
+                                อ่านเพิ่มเติม
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <article class="border rounded overflow-hidden h-100">
+                        <div class="ratio ratio-4x3 bg-light">
+                            <div
+                                class="d-flex align-items-center justify-content-center"
+                            >
+                                <span class="text-muted">
+                                    Article Image
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-4">
+                            <p class="small text-muted mb-2">
+                                Behind the Brand
+                            </p>
+
+                            <h3 class="h5">
+                                เบื้องหลังการสร้างสรรค์ Lyceea
+                            </h3>
+
+                            <p>
+                                สำรวจแนวคิด กระบวนการออกแบบ
+                                และรายละเอียดที่อยู่เบื้องหลังผลิตภัณฑ์ของเรา
+                            </p>
+
+                            <a
+                                href="{% url 'pages:blog_detail' %}"
+                                class="text-dark"
+                            >
+                                อ่านเพิ่มเติม
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</section>
+
+{% endblock %}

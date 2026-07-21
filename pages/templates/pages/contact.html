@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+ติดต่อเรา | Lyceea
+{% endblock %}
+
+{% block meta_description %}
+<meta
+    name="description"
+    content="ติดต่อ Lyceea สำหรับคำถามเกี่ยวกับสินค้า คำสั่งซื้อ การชำระเงิน การจัดส่ง และบริการของเรา"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+
+        <header class="text-center mb-5">
+            <p class="text-uppercase small mb-2">
+                Contact Lyceea
+            </p>
+
+            <h1 class="display-5 mb-3">
+                We'd Love to Hear From You
+            </h1>
+
+            <p
+                class="lead mx-auto"
+                style="max-width: 760px;"
+            >
+                หากมีคำถามเกี่ยวกับสินค้า คำสั่งซื้อ
+                การชำระเงิน หรือการจัดส่ง
+                ทีมงาน Lyceea พร้อมดูแลและให้ความช่วยเหลือ
+            </p>
+        </header>
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-6 col-lg-4">
+                <section class="border rounded p-4 h-100">
+                    <p class="text-uppercase small text-muted mb-2">
+                        Email
+                    </p>
+
+                    <h2 class="h4 mb-3">
+                        ติดต่อทางอีเมล
+                    </h2>
+
+                    <p>
+                        เหมาะสำหรับสอบถามข้อมูลทั่วไป
+                        รายละเอียดสินค้า และความช่วยเหลือเกี่ยวกับคำสั่งซื้อ
+                    </p>
+
+                    <a
+                        href="mailto:support@lyceea.com"
+                        class="text-dark"
+                    >
+                        support@lyceea.com
+                    </a>
+                </section>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <section class="border rounded p-4 h-100">
+                    <p class="text-uppercase small text-muted mb-2">
+                        Customer Service
+                    </p>
+
+                    <h2 class="h4 mb-3">
+                        เวลาทำการ
+                    </h2>
+
+                    <p class="mb-2">
+                        วันจันทร์ – วันอาทิตย์
+                    </p>
+
+                    <p class="mb-0">
+                        เวลา 09:00 – 18:00 น.
+                    </p>
+                </section>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <section class="border rounded p-4 h-100">
+                    <p class="text-uppercase small text-muted mb-2">
+                        Order Support
+                    </p>
+
+                    <h2 class="h4 mb-3">
+                        สอบถามคำสั่งซื้อ
+                    </h2>
+
+                    <p>
+                        กรุณาแจ้งหมายเลขคำสั่งซื้อ
+                        พร้อมชื่อและอีเมลที่ใช้ในการสั่งซื้อ
+                        เพื่อให้ทีมงานตรวจสอบได้รวดเร็วยิ่งขึ้น
+                    </p>
+
+                    <a
+                        href="{% url 'pages:contact' %}"
+                        class="text-dark"
+                    >
+                        ติดต่อทีมงาน
+                    </a>
+                </section>
+            </div>
+
+        </div>
+
+        <section class="row align-items-center g-5 mb-5">
+
+            <div class="col-lg-6">
+                <div
+                    class="ratio ratio-4x3 bg-light rounded overflow-hidden"
+                >
+                    <div
+                        class="d-flex align-items-center justify-content-center"
+                    >
+                        <span class="text-muted">
+                            Contact or Brand Image
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <p class="text-uppercase small mb-2">
+                    Connect With Us
+                </p>
+
+                <h2 class="mb-3">
+                    ติดตามเรื่องราวของ Lyceea
+                </h2>
+
+                <p class="mb-4">
+                    ติดตามข่าวสาร คอลเลกชันใหม่
+                    แรงบันดาลใจเรื่องกลิ่นหอม
+                    และกิจกรรมจาก Lyceea ผ่านช่องทางโซเชียลมีเดีย
+                </p>
+
+                <div class="d-grid gap-3">
+
+                    <div class="border rounded p-3">
+                        <strong>Facebook</strong>
+                        <p class="small text-muted mb-0">
+                            เพิ่มลิงก์ Facebook ของ Lyceea ภายหลัง
+                        </p>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <strong>Instagram</strong>
+                        <p class="small text-muted mb-0">
+                            เพิ่มลิงก์ Instagram ของ Lyceea ภายหลัง
+                        </p>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <strong>TikTok</strong>
+                        <p class="small text-muted mb-0">
+                            เพิ่มลิงก์ TikTok ของ Lyceea ภายหลัง
+                        </p>
+                    </div>
+
+                    <div class="border rounded p-3">
+                        <strong>LINE Official Account</strong>
+                        <p class="small text-muted mb-0">
+                            เพิ่มลิงก์ LINE Official Account ภายหลัง
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="border-top pt-5 text-center">
+            <p class="text-uppercase small mb-2">
+                Frequently Asked Questions
+            </p>
+
+            <h2 class="mb-3">
+                อาจมีคำตอบที่คุณกำลังค้นหา
+            </h2>
+
+            <p class="mb-4">
+                ตรวจสอบข้อมูลเกี่ยวกับการสั่งซื้อ
+                การชำระเงิน การจัดส่ง และการดูแลผลิตภัณฑ์
+            </p>
+
+            <a
+                href="{% url 'pages:faq' %}"
+                class="btn btn-dark px-4"
+            >
+                ดูคำถามที่พบบ่อย
+            </a>
+        </section>
+
+    </div>
+</section>
+
+{% endblock %}

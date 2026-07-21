@@ -4,41 +4,97 @@
         <div class="footer-brand">
             <h3>Lyceea</h3>
             <span>BOTANICAL CANDLE</span>
+
             <p>
-                เทียนหอมแฮนด์เมดจากพฤกษาธรรมชาติ
-                เพื่อเติมความสงบ อบอุ่น และหรูหราให้ทุกช่วงเวลาของคุณ
+                เทียนหอมแฮนด์เมดที่ออกแบบมาเพื่อเติมเต็ม
+                ความสงบ ความอบอุ่น และบรรยากาศที่มีความหมาย
+                ให้กับทุกช่วงเวลาภายในบ้าน
             </p>
         </div>
 
         <div class="footer-links">
             <h5>เมนู</h5>
-            <a href="#">หน้าแรก</a>
-            <a href="#">สินค้า</a>
-            <a href="#">คอลเลกชัน</a>
-            <a href="#">เกี่ยวกับเรา</a>
-            <a href="#">บทความ</a>
+
+            <a href="{% url 'products:home' %}">
+                หน้าแรก
+            </a>
+
+            <a href="{% url 'products:product_list' %}">
+                สินค้า
+            </a>
+
+            <a href="{% url 'pages:about' %}">
+                เกี่ยวกับเรา
+            </a>
+
+            <a href="{% url 'pages:reviews' %}">
+                รีวิว
+            </a>
+
+            <a href="{% url 'pages:blog_list' %}">
+                บทความ
+            </a>
         </div>
 
         <div class="footer-links">
             <h5>ข้อมูลลูกค้า</h5>
-            <a href="#">วิธีสั่งซื้อ</a>
-            <a href="#">การจัดส่ง</a>
-            <a href="#">การคืนสินค้า</a>
-            <a href="#">นโยบายความเป็นส่วนตัว</a>
-            <a href="#">เงื่อนไขการใช้งาน</a>
+
+            <a href="{% url 'pages:faq' %}">
+                วิธีสั่งซื้อและคำถามที่พบบ่อย
+            </a>
+
+            <a href="{% url 'pages:shipping_policy' %}">
+                นโยบายการจัดส่ง
+            </a>
+
+            <a href="{% url 'pages:return_policy' %}">
+                นโยบายการคืนสินค้า
+            </a>
+
+            <a href="{% url 'pages:privacy_policy' %}">
+                นโยบายความเป็นส่วนตัว
+            </a>
+
+            <a href="{% url 'pages:terms' %}">
+                ข้อกำหนดและเงื่อนไข
+            </a>
         </div>
 
         <div class="footer-contact">
             <h5>ติดต่อเรา</h5>
-            <p>โทร: 062-828-2895</p>
-            <p>Email: hello@lyceea.com</p>
-            <p>Line: @lyceea.cozy</p>
-            <p>Bangkok, Thailand</p>
+
+            <p>
+                โทร:
+                <a href="tel:0628282895">
+                    062-828-2895
+                </a>
+            </p>
+
+            <p>
+                Email:
+                <a href="mailto:hello@lyceea.com">
+                    hello@lyceea.com
+                </a>
+            </p>
+
+            <p>
+                Line: @lyceea.cozy
+            </p>
+
+            <p>
+                Bangkok, Thailand
+            </p>
+
+            <a href="{% url 'pages:contact' %}">
+                ดูข้อมูลติดต่อทั้งหมด
+            </a>
         </div>
 
     </div>
 
     <div class="footer-bottom">
-        <p>© 2026 Lyceea. All Rights Reserved.</p>
+        <p>
+            © 2026 Lyceea. All Rights Reserved.
+        </p>
     </div>
 </footer>

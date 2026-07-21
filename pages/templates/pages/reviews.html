@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+รีวิวจากลูกค้า | Lyceea
+{% endblock %}
+
+{% block meta_description %}
+<meta
+    name="description"
+    content="อ่านประสบการณ์และความคิดเห็นจากลูกค้าที่เลือกใช้ผลิตภัณฑ์เทียนหอมและของขวัญจาก Lyceea"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <p class="text-uppercase small mb-2">
+                Customer Reviews
+            </p>
+
+            <h1 class="display-5 mb-3">
+                Hear From Our Customers
+            </h1>
+
+            <p class="lead mx-auto" style="max-width: 760px;">
+                ทุกคำรีวิวคือกำลังใจที่ช่วยให้ Lyceea
+                พัฒนาผลิตภัณฑ์และบริการอย่างต่อเนื่อง
+                เราภูมิใจที่ได้เป็นส่วนหนึ่งของช่วงเวลาแห่งความอบอุ่น
+                ความสุข และการพักผ่อนของลูกค้าทุกคน
+            </p>
+        </div>
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-6 col-lg-4">
+                <article class="border rounded p-4 h-100">
+                    <div
+                        class="mb-3"
+                        aria-label="คะแนน 5 จาก 5 ดาว"
+                    >
+                        ★★★★★
+                    </div>
+
+                    <blockquote class="mb-4">
+                        “กลิ่นหอมละมุนมาก จุดแล้วห้องดูอบอุ่นขึ้นทันที
+                        บรรจุภัณฑ์สวยและเหมาะสำหรับมอบเป็นของขวัญมากค่ะ”
+                    </blockquote>
+
+                    <footer>
+                        <strong>ลูกค้า Lyceea</strong>
+                        <p class="small text-muted mb-0">
+                            Verified Customer
+                        </p>
+                    </footer>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <article class="border rounded p-4 h-100">
+                    <div
+                        class="mb-3"
+                        aria-label="คะแนน 5 จาก 5 ดาว"
+                    >
+                        ★★★★★
+                    </div>
+
+                    <blockquote class="mb-4">
+                        “คุณภาพดีเกินคาด เทียนเผาไหม้สม่ำเสมอ
+                        กลิ่นไม่ฉุน เหมาะสำหรับใช้ในช่วงพักผ่อนก่อนนอน”
+                    </blockquote>
+
+                    <footer>
+                        <strong>ลูกค้า Lyceea</strong>
+                        <p class="small text-muted mb-0">
+                            Verified Customer
+                        </p>
+                    </footer>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <article class="border rounded p-4 h-100">
+                    <div
+                        class="mb-3"
+                        aria-label="คะแนน 5 จาก 5 ดาว"
+                    >
+                        ★★★★★
+                    </div>
+
+                    <blockquote class="mb-4">
+                        “แพ็กสินค้ามาดีมาก รายละเอียดทุกอย่างดูใส่ใจ
+                        ตั้งแต่กล่อง บรรจุภัณฑ์ ไปจนถึงตัวผลิตภัณฑ์”
+                    </blockquote>
+
+                    <footer>
+                        <strong>ลูกค้า Lyceea</strong>
+                        <p class="small text-muted mb-0">
+                            Verified Customer
+                        </p>
+                    </footer>
+                </article>
+            </div>
+
+        </div>
+
+        <section class="border rounded p-4 p-md-5 text-center mb-5">
+            <p class="text-uppercase small mb-2">
+                Share Your Experience
+            </p>
+
+            <h2 class="mb-3">
+                แบ่งปันประสบการณ์ของคุณ
+            </h2>
+
+            <p class="mx-auto mb-4" style="max-width: 680px;">
+                รีวิวของคุณช่วยให้ลูกค้าคนอื่นตัดสินใจได้ง่ายขึ้น
+                และช่วยให้เราพัฒนาผลิตภัณฑ์และบริการให้ดียิ่งขึ้น
+            </p>
+
+            <a
+                href="{% url 'pages:contact' %}"
+                class="btn btn-dark px-4"
+            >
+                ติดต่อเรา
+            </a>
+        </section>
+
+        <section class="text-center py-4 border-top">
+            <h2 class="mb-3">
+                ค้นพบผลิตภัณฑ์ที่ลูกค้าชื่นชอบ
+            </h2>
+
+            <p class="mb-4">
+                เลือกชมเทียนหอมและของขวัญจาก Lyceea
+                ที่ออกแบบมาเพื่อเติมเต็มบรรยากาศภายในบ้าน
+            </p>
+
+            <a
+                href="{% url 'products:product_list' %}"
+                class="btn btn-outline-dark px-4"
+            >
+                เลือกชมสินค้า
+            </a>
+        </section>
+
+    </div>
+</section>
+
+{% endblock %}

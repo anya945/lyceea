@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}
+นโยบายการคืนและเปลี่ยนสินค้า | Lyceea
+{% endblock %}
+
+{% block meta_description %}
+<meta
+    name="description"
+    content="เงื่อนไขและขั้นตอนการแจ้งปัญหา คืน หรือเปลี่ยนสินค้าของ Lyceea"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+
+        <header class="text-center mb-5">
+            <p class="text-uppercase small mb-2">
+                Return & Exchange Policy
+            </p>
+
+            <h1 class="display-5 mb-3">
+                นโยบายการคืนและเปลี่ยนสินค้า
+            </h1>
+
+            <p class="lead mx-auto" style="max-width: 760px;">
+                Lyceea มุ่งมั่นส่งมอบสินค้าที่มีคุณภาพ
+                หากพบปัญหาจากการผลิตหรือการจัดส่ง
+                เรายินดีตรวจสอบและให้ความช่วยเหลือ
+            </p>
+        </header>
+
+        <div class="mx-auto" style="max-width: 900px;">
+
+            <section class="border rounded p-4 mb-4">
+                <h2 class="h4 mb-3">
+                    กรณีที่สามารถแจ้งปัญหาได้
+                </h2>
+
+                <ul class="mb-0">
+                    <li class="mb-2">
+                        ได้รับสินค้าผิดรายการหรือผิดจำนวน
+                    </li>
+                    <li class="mb-2">
+                        สินค้าเสียหายจากกระบวนการจัดส่ง
+                    </li>
+                    <li>
+                        สินค้ามีความบกพร่องจากกระบวนการผลิต
+                    </li>
+                </ul>
+            </section>
+
+            <section class="border rounded p-4 mb-4">
+                <h2 class="h4 mb-3">
+                    ระยะเวลาแจ้งปัญหา
+                </h2>
+
+                <p class="mb-0">
+                    กรุณาแจ้งปัญหาภายใน 48 ชั่วโมง
+                    หลังได้รับสินค้า
+                    เพื่อให้ทีมงานสามารถตรวจสอบข้อมูล
+                    และหลักฐานที่เกี่ยวข้องได้อย่างครบถ้วน
+                </p>
+            </section>
+
+            <section class="border rounded p-4 mb-4">
+                <h2 class="h4 mb-3">
+                    หลักฐานที่ต้องใช้
+                </h2>
+
+                <ul class="mb-0">
+                    <li class="mb-2">
+                        หมายเลขคำสั่งซื้อ
+                    </li>
+                    <li class="mb-2">
+                        ภาพสินค้าที่พบปัญหา
+                    </li>
+                    <li class="mb-2">
+                        ภาพบรรจุภัณฑ์ภายนอกและภายใน
+                    </li>
+                    <li>
+                        รายละเอียดปัญหาที่พบ
+                    </li>
+                </ul>
+            </section>
+
+            <section class="border rounded p-4 mb-4">
+                <h2 class="h4 mb-3">
+                    กรณีที่ไม่สามารถคืนหรือเปลี่ยนสินค้าได้
+                </h2>
+
+                <ul class="mb-0">
+                    <li class="mb-2">
+                        สินค้าถูกใช้งานแล้ว
+                    </li>
+                    <li class="mb-2">
+                        สินค้าเสียหายจากการใช้งานหรือการเก็บรักษาที่ไม่เหมาะสม
+                    </li>
+                    <li class="mb-2">
+                        แจ้งปัญหาเกินระยะเวลาที่กำหนด
+                    </li>
+                    <li>
+                        เปลี่ยนใจหรือไม่พึงพอใจในกลิ่น
+                        โดยสินค้าไม่มีความเสียหายหรือความบกพร่อง
+                    </li>
+                </ul>
+            </section>
+
+            <section class="border rounded p-4 mb-4">
+                <h2 class="h4 mb-3">
+                    ขั้นตอนการตรวจสอบ
+                </h2>
+
+                <p class="mb-0">
+                    หลังได้รับข้อมูลครบถ้วน
+                    ทีมงานจะตรวจสอบรายละเอียดของคำสั่งซื้อ
+                    สภาพสินค้า และหลักฐานที่ส่งมา
+                    ก่อนแจ้งผลและแนวทางดำเนินการกลับไปยังลูกค้า
+                </p>
+            </section>
+
+            <section class="border rounded p-4">
+                <h2 class="h4 mb-3">
+                    การเปลี่ยนสินค้าหรือคืนเงิน
+                </h2>
+
+                <p class="mb-0">
+                    วิธีดำเนินการจะพิจารณาตามลักษณะของปัญหา
+                    ความพร้อมของสินค้า และผลการตรวจสอบ
+                    โดยทีมงานจะแจ้งรายละเอียดให้ลูกค้าทราบ
+                    ก่อนดำเนินการทุกครั้ง
+                </p>
+            </section>
+
+        </div>
+
+        <footer class="text-center mt-5 pt-5 border-top">
+            <h2 class="mb-3">
+                ต้องการแจ้งปัญหาเกี่ยวกับสินค้า?
+            </h2>
+
+            <a
+                href="{% url 'pages:contact' %}"
+                class="btn btn-dark px-4"
+            >
+                ติดต่อทีมงาน
+            </a>
+        </footer>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,447 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+คำถามที่พบบ่อย | Lyceea
+{% endblock %}
+
+{% block meta_description %}
+<meta
+    name="description"
+    content="คำถามที่พบบ่อยเกี่ยวกับการสั่งซื้อ การชำระเงิน การจัดส่ง การคืนสินค้า และวิธีดูแลเทียนหอม Lyceea"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+
+        <header class="text-center mb-5">
+            <p class="text-uppercase small mb-2">
+                Help Center
+            </p>
+
+            <h1 class="display-5 mb-3">
+                Frequently Asked Questions
+            </h1>
+
+            <p
+                class="lead mx-auto"
+                style="max-width: 760px;"
+            >
+                รวมคำตอบเกี่ยวกับการสั่งซื้อ การชำระเงิน
+                การจัดส่ง และการดูแลผลิตภัณฑ์ Lyceea
+            </p>
+        </header>
+
+        <div
+            class="accordion mx-auto"
+            id="faqAccordion"
+            style="max-width: 900px;"
+        >
+
+            <section class="mb-5">
+                <h2 class="h4 mb-3">
+                    การสั่งซื้อ
+                </h2>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingOrderOne"
+                    >
+                        <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOrderOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOrderOne"
+                        >
+                            สามารถสั่งซื้อสินค้าได้อย่างไร
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseOrderOne"
+                        class="accordion-collapse collapse show"
+                        aria-labelledby="headingOrderOne"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            เลือกสินค้าที่ต้องการ
+                            เพิ่มสินค้าลงในตะกร้า
+                            ตรวจสอบจำนวนและรายละเอียดสินค้า
+                            จากนั้นดำเนินการ Checkout
+                            และกรอกข้อมูลสำหรับจัดส่งให้ครบถ้วน
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingOrderTwo"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOrderTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseOrderTwo"
+                        >
+                            สามารถตรวจสอบคำสั่งซื้อได้ที่ไหน
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseOrderTwo"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingOrderTwo"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            สมาชิกสามารถเข้าสู่ระบบ
+                            และตรวจสอบคำสั่งซื้อทั้งหมดได้จากหน้า
+                            Order History ภายในบัญชีของตนเอง
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingOrderThree"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOrderThree"
+                            aria-expanded="false"
+                            aria-controls="collapseOrderThree"
+                        >
+                            สามารถยกเลิกคำสั่งซื้อได้หรือไม่
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseOrderThree"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingOrderThree"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            กรุณาติดต่อทีมงานโดยเร็วที่สุด
+                            การยกเลิกจะสามารถดำเนินการได้
+                            หากคำสั่งซื้อยังไม่เข้าสู่ขั้นตอนการจัดเตรียม
+                            หรือจัดส่งสินค้า
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 mb-3">
+                    การชำระเงิน
+                </h2>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingPaymentOne"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapsePaymentOne"
+                            aria-expanded="false"
+                            aria-controls="collapsePaymentOne"
+                        >
+                            รองรับการชำระเงินรูปแบบใด
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapsePaymentOne"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingPaymentOne"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            ขณะนี้รองรับการโอนเงิน
+                            และการอัปโหลดหลักฐานการชำระเงิน
+                            ผ่านหน้ารายละเอียดคำสั่งซื้อบนเว็บไซต์
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingPaymentTwo"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapsePaymentTwo"
+                            aria-expanded="false"
+                            aria-controls="collapsePaymentTwo"
+                        >
+                            อัปโหลดหลักฐานการชำระเงินได้อย่างไร
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapsePaymentTwo"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingPaymentTwo"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            หลังสร้างคำสั่งซื้อแล้ว
+                            ให้เปิดหน้ารายละเอียดคำสั่งซื้อ
+                            เลือกอัปโหลดหลักฐานการชำระเงิน
+                            และตรวจสอบว่าไฟล์ถูกส่งสำเร็จก่อนออกจากหน้า
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 mb-3">
+                    การจัดส่ง
+                </h2>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingShippingOne"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseShippingOne"
+                            aria-expanded="false"
+                            aria-controls="collapseShippingOne"
+                        >
+                            ใช้เวลาเตรียมและจัดส่งสินค้ากี่วัน
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseShippingOne"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingShippingOne"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            โดยทั่วไปจะจัดเตรียมสินค้าภายใน
+                            1–2 วันทำการหลังยืนยันการชำระเงิน
+                            ระยะเวลาขนส่งขึ้นอยู่กับพื้นที่ปลายทาง
+                            และการดำเนินงานของบริษัทขนส่ง
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingShippingTwo"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseShippingTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseShippingTwo"
+                        >
+                            สามารถติดตามสถานะพัสดุได้หรือไม่
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseShippingTwo"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingShippingTwo"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            เมื่อจัดส่งสินค้าแล้ว
+                            ลูกค้าจะได้รับข้อมูลหรือหมายเลขติดตามพัสดุ
+                            ตามช่องทางที่ Lyceea กำหนด
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-5">
+                <h2 class="h4 mb-3">
+                    การดูแลเทียนหอม
+                </h2>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingCandleOne"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseCandleOne"
+                            aria-expanded="false"
+                            aria-controls="collapseCandleOne"
+                        >
+                            ควรตัดไส้เทียนก่อนจุดหรือไม่
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseCandleOne"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCandleOne"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            ควรตัดไส้เทียนให้มีความยาวประมาณ
+                            5 มิลลิเมตรก่อนใช้งานทุกครั้ง
+                            เพื่อช่วยควบคุมเปลวไฟ
+                            ลดการเกิดเขม่า
+                            และทำให้เทียนเผาไหม้สม่ำเสมอ
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingCandleTwo"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseCandleTwo"
+                            aria-expanded="false"
+                            aria-controls="collapseCandleTwo"
+                        >
+                            ควรจุดเทียนนานเท่าไร
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseCandleTwo"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCandleTwo"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            ควรปฏิบัติตามคำแนะนำของผลิตภัณฑ์
+                            และไม่ควรจุดเทียนต่อเนื่องเป็นเวลานานเกินไป
+                            โดยเฉพาะเมื่อภาชนะมีอุณหภูมิสูงมาก
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingCandleThree"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseCandleThree"
+                            aria-expanded="false"
+                            aria-controls="collapseCandleThree"
+                        >
+                            จุดเทียนทิ้งไว้โดยไม่มีผู้ดูแลได้หรือไม่
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseCandleThree"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCandleThree"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            ไม่ควรจุดเทียนทิ้งไว้โดยไม่มีผู้ดูแล
+                            ควรดับเทียนก่อนออกจากห้องหรือเข้านอน
+                            และวางให้ห่างจากเด็ก สัตว์เลี้ยง
+                            รวมถึงวัสดุไวไฟ
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="h4 mb-3">
+                    การคืนและเปลี่ยนสินค้า
+                </h2>
+
+                <div class="accordion-item">
+                    <h3
+                        class="accordion-header"
+                        id="headingReturnOne"
+                    >
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseReturnOne"
+                            aria-expanded="false"
+                            aria-controls="collapseReturnOne"
+                        >
+                            แจ้งปัญหาสินค้าเสียหายได้อย่างไร
+                        </button>
+                    </h3>
+
+                    <div
+                        id="collapseReturnOne"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingReturnOne"
+                        data-bs-parent="#faqAccordion"
+                    >
+                        <div class="accordion-body">
+                            กรุณาติดต่อทีมงานพร้อมหมายเลขคำสั่งซื้อ
+                            รูปภาพสินค้า รูปบรรจุภัณฑ์
+                            และรายละเอียดของปัญหา
+                            ภายในระยะเวลาที่กำหนดในนโยบายการคืนสินค้า
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="text-center mt-5 pt-5 border-top">
+            <h2 class="mb-3">
+                ยังไม่พบคำตอบที่ต้องการ?
+            </h2>
+
+            <p class="mb-4">
+                ติดต่อทีมงาน Lyceea
+                เพื่อสอบถามข้อมูลหรือขอความช่วยเหลือเพิ่มเติม
+            </p>
+
+            <a
+                href="{% url 'pages:contact' %}"
+                class="btn btn-dark px-4"
+            >
+                ติดต่อเรา
+            </a>
+        </footer>
+
+    </div>
+</section>
+
+{% endblock %}
