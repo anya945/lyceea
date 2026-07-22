@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "orders",
     "accounts",
     "pages",
+    "promotions.apps.PromotionConfig",
 ]
 
 

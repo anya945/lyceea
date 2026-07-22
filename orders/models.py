@@ -124,6 +124,29 @@ class Order(models.Model):
         default=0,
     )
 
+    discount_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
+    shipping_discount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+
+    coupon_code = models.CharField(
+        max_length=50,
+        blank=True,
+        default="",
+    )
+
+    promotion_data = models.JSONField(
+        blank=True,
+        default=dict,
+    )
+
     grand_total = models.DecimalField(
         max_digits=10,
         decimal_places=2,
