@@ -238,6 +238,45 @@
                     </strong>
                 </div>
 
+                <div class="checkout-promotion">
+
+                    <label for="coupon_code">
+                        รหัสคูปอง
+                    </label>
+
+                    <input
+                        type="text"
+                        id="coupon_code"
+                        name="coupon_code"
+                        value="{{ coupon_code }}"
+                        placeholder="กรอกรหัสคูปอง"
+                        class="checkout-coupon-input"
+                    >
+
+                    {% if coupon_code %}
+                        <div class="checkout-summary-row">
+                            <span>คูปอง</span>
+
+                            <strong>
+                                {{ coupon_code }}
+                            </strong>
+                        </div>
+                    {% endif %}
+
+                    {% if promotion_result.message %}
+                        <p class="
+                            {% if promotion_result.is_valid %}
+                                promotion-success
+                            {% else %}
+                                promotion-error
+                            {% endif %}
+                        ">
+                            {{ promotion_result.message }}
+                        </p>
+                    {% endif %}
+
+                </div>
+
                 <div class="checkout-summary-row">
                     <span>ค่าจัดส่ง</span>
 
@@ -249,6 +288,26 @@
                         </strong>
                     {% endif %}
                 </div>
+
+                {% if discount_amount > 0 %}
+                    <div class="checkout-summary-row checkout-discount-row">
+                        <span>ส่วนลดสินค้า</span>
+
+                        <strong>
+                            - ฿{{ discount_amount|floatformat:0 }}
+                        </strong>
+                    </div>
+                {% endif %}
+
+                {% if shipping_discount > 0 %}
+                    <div class="checkout-summary-row checkout-discount-row">
+                        <span>ส่วนลดค่าจัดส่ง</span>
+
+                        <strong>
+                            - ฿{{ shipping_discount|floatformat:0 }}
+                        </strong>
+                    </div>
+                {% endif %}
 
                 <div class="checkout-summary-total">
                     <span>ยอดชำระทั้งหมด</span>

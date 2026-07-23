@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 from orders.emails import send_order_confirmation
 from orders.models import Order, OrderItem
 from orders.utils import calculate_shipping
+from promotions.services import PromotionEngine
 
 from .cart import Cart
 from .forms import CheckoutForm
@@ -421,16 +422,44 @@ def checkout(request):
 
     subtotal = cart.get_total_price()
     shipping_cost = calculate_shipping(subtotal)
-    grand_total = subtotal + shipping_cost
+
+    coupon_code = request.POST.get(
+        "coupon_code",
+        "",
+    )
+
+    promotion_result = PromotionEngine.evaluate(
+        subtotal=subtotal,
+        shipping_cost=shipping_cost,
+        user=request.user,
+        coupon_code=coupon_code,
+    )
+
+    grand_total = promotion_result.grand_total
 
     if request.method == "POST":
         form = CheckoutForm(request.POST)
 
-        if form.is_valid():
-            payment_value = form.cleaned_data[
-                "payment_method"
-            ]
+        form_is_valid = form.is_valid()
 
+        if (
+                form_is_valid
+            and not promotion_result.is_valid
+        ):
+            form.add_error(
+            None,
+            promotion_result.message,
+        )
+
+        if (
+            form_is_valid
+            and promotion_result.is_valid
+        ):
+            payment_value = form.cleaned_data[
+            "payment_method"
+        ]
+
+        
             payment_method_map = {
                 "bank_transfer": "BANK_TRANSFER",
                 "BANK_TRANSFER": "BANK_TRANSFER",
@@ -494,6 +523,14 @@ def checkout(request):
                         address=full_address,
                         subtotal=subtotal,
                         shipping_fee=shipping_cost,
+                        discount_amount=(
+                            promotion_result.discount_amount
+                        ),
+                        shipping_discount=(
+                                promotion_result.shipping_discount
+                        ),
+                        coupon_code=promotion_result.coupon_code,
+                        promotion_data=promotion_result.as_snapshot(),
                         grand_total=grand_total,
                         payment_method=payment_method,
                         payment_status="PENDING",
@@ -543,10 +580,16 @@ def checkout(request):
                             }
                         )
 
+                    PromotionEngine.consume(
+                        promotion_result
+                    )
+
+
                     recipient_email = (
                         form.cleaned_data["email"]
                     )
 
+                    
                     order_detail_url = (
                         request.build_absolute_uri(
                             f"/orders/"
@@ -651,8 +694,17 @@ def checkout(request):
                     "shipping_cost": str(
                         shipping_cost
                     ),
+                    "discount_amount": str(
+                        promotion_result.discount_amount
+                    ),
+                    "shipping_discount": str(
+                        promotion_result.shipping_discount
+                    ),
+                    "coupon_code": (
+                        promotion_result.coupon_code
+                    ),
                     "grand_total": str(
-                        grand_total
+                         grand_total
                     ),
                 }
 
@@ -686,6 +738,14 @@ def checkout(request):
         "default_address": default_address,
         "subtotal": subtotal,
         "shipping_cost": shipping_cost,
+        "discount_amount": (
+            promotion_result.discount_amount
+        ),
+        "shipping_discount": (
+            promotion_result.shipping_discount
+        ),
+        "coupon_code": coupon_code,
+        "promotion_result": promotion_result,
         "grand_total": grand_total,
     }
 
