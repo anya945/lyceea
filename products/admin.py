@@ -204,7 +204,8 @@ class ProductAdmin(admin.ModelAdmin):
     def stock_status(self, obj):
         if obj.stock == 0:
             return format_html(
-                '<strong style="color: #c62828;">หมด</strong>'
+                '<strong style="color: #c62828;">{}</strong>',
+                'หมด',
             )
 
         if obj.stock <= 5:
