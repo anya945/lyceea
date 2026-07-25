@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <g fill="none" stroke="#8B6A43" stroke-width="5">
+    <path d="M110 18 L202 110 L110 202 L18 110 Z"/>
+  </g>
+  <path d="M110 0 L122 18 L110 36 L98 18 Z" fill="#8B6A43"/>
+  <path d="M110 188 L120 198 L110 208 L100 198 Z" fill="#8B6A43"/>
+  <text x="110" y="140" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="112" fill="#6F4F2E">LC</text>
+</svg>

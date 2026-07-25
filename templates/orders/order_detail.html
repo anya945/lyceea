@@ -113,6 +113,15 @@
                     </span>
                 </div>
 
+            {% if order.discount_amount > 0 %}
+                <div class="d-flex justify-content-between mb-2">
+                    <span>ส่วนลด</span>
+                    <span>
+                       - ฿{{ order.discount_amount|floatformat:2 }}
+                    </span>
+                </div>
+            {% endif %}
+
                 <div class="d-flex justify-content-between mb-2">
                     <span>ค่าจัดส่ง</span>
                     <span>
