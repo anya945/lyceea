@@ -1,0 +1,10 @@
+﻿/* ==========================================================
+   VARIABLES
+========================================================== */
+
+/* NOTE: the following custom properties are referenced in ACCOUNTS
+   (.password-form-card .form-control, .password-security-note, etc.)
+   but were never defined anywhere in the original file:
+   --account-border, --account-text, --account-gold, --account-muted
+   Add a :root block here with real values -- until then those
+   declarations silently fail in the browser. */

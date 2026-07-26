@@ -34,3 +34,7 @@ Thumbs.db
 
 # Backup Files
 *.zip
+
+# Backup files
+static/css/backup/
+templates/backup/

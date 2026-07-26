@@ -1,0 +1,124 @@
+﻿/* ==========================================================
+   NAVBAR
+========================================================== */
+
+.announcement-bar {
+    background: #efe2d3;
+    color: #6a4b3a;
+    text-align: center;
+    padding: 7px 0;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.lyceea-navbar {
+    background: #fffaf4;
+    border-bottom: 1px solid #eadfce;
+    padding: 18px 0;
+}
+
+.brand-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #6a4b3a !important;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.navbar-menu a {
+    margin: 0 18px;
+    color: #3b2b23;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.navbar-icons span {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.lyceea-navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-logo span {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 28px;
+}
+
+.navbar-icons {
+    display: flex;
+    gap: 18px;
+    font-size: 22px;
+    color: #6a4b3a;
+}
+
+.navbar-wishlist-link {
+    position: relative;
+}
+
+.navbar-icon-count {
+    position: absolute;
+    top: -9px;
+    right: -11px;
+    display: grid;
+    place-items: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #6b422c;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.navbar-cart-link {
+    position: relative;
+}
+
+.logout-form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-icon-button {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon-button:hover {
+    opacity: 0.75;
+}
+
+.navbar-logo {
+    display: block;
+    width: auto;
+    height: 54px;
+    max-width: 300px;
+    object-fit: contain;
+}
