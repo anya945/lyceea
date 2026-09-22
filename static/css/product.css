@@ -38,7 +38,7 @@
 
 .product-img-wrap {
     position: relative;
-    height: 260px;
+    height: 190px;
     overflow: hidden;
     background: #f2e8dc;
 }
@@ -87,6 +87,7 @@
     flex: 1;
 }
 
+.product-info h3,
 .product-info h4 {
     color: #6a4b3a;
     font-size: 17px;
@@ -169,8 +170,8 @@
     align-items: center;
     gap: 10px;
     min-height: 34px;
-    margin-top: auto;
-    margin-bottom: 16px;
+    margin-top: 8px;
+    margin-bottom: 10px;
 }
 
 .original-price {
@@ -235,3 +236,152 @@
 .product-detail-cart-form .add-cart-btn {
     width: 100%;
 }
+
+
+/* ===== PRODUCT CARD COMPACT ===== */
+
+.product-info {
+    padding: 14px;
+}
+
+.product-info h3.product-name {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.product-description {
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 0;
+    margin-bottom: 10px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+
+
+
+
+
+/* ===== PRODUCT CARD BUTTON COMPACT ===== */
+.product-card-cart-form .add-cart-btn {
+    margin-top: 0;
+}
+
+
+/* ===== PRODUCT CARD HEIGHT COMPACT ===== */
+.product-list-section .luxury-product-card {
+    height: auto;
+}
+
+.product-list-section .product-info {
+    flex: none;
+}
+
+.product-list-section .product-card-cart-form {
+    margin-top: 0;
+}
+
+
+/* ===== PRODUCT CARD FINAL SPACING ===== */
+.product-list-section .product-price {
+    min-height: 0;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.product-list-section .product-card-cart-form {
+    margin: 0;
+}
+
+.product-list-section .product-card-cart-form .add-cart-btn {
+    margin-top: 0;
+}
+
+
+/* ==========================================================
+   PRODUCT CARD — COMPACT V1
+   ========================================================== */
+
+.bestseller-section .product-grid,
+.featured-products-section .product-grid {
+    grid-template-columns: repeat(4, 165px);
+    gap: 18px;
+    justify-content: center;
+}
+
+.bestseller-section .luxury-product-card,
+.featured-products-section .luxury-product-card {
+    height: auto;
+}
+
+.bestseller-section .product-img-wrap,
+.featured-products-section .product-img-wrap {
+    height: 135px;
+}
+
+.bestseller-section .product-info,
+.featured-products-section .product-info {
+    padding: 10px;
+}
+
+.bestseller-section .product-category,
+.featured-products-section .product-category {
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.bestseller-section .product-info h3.product-name,
+.featured-products-section .product-info h3.product-name {
+    font-size: 13px;
+    line-height: 1.35;
+    margin-bottom: 5px;
+}
+
+.bestseller-section .product-description,
+.featured-products-section .product-description {
+    font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 7px;
+}
+
+.bestseller-section .product-price,
+.featured-products-section .product-price {
+    min-height: 24px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+.bestseller-section .product-info strong,
+.featured-products-section .product-info strong {
+    font-size: 14px;
+}
+
+.bestseller-section .product-card-cart-form .add-cart-btn,
+.featured-products-section .product-card-cart-form .add-cart-btn {
+    padding: 7px 8px;
+    min-height: 34px;
+    font-size: 11px;
+}
+
+.bestseller-section .wishlist-btn,
+.featured-products-section .wishlist-btn {
+    width: 32px;
+    height: 32px;
+}
+
+.bestseller-section .wishlist-btn svg,
+.featured-products-section .wishlist-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
