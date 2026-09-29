@@ -1,4 +1,4 @@
-﻿/* ==========================================================
+/* ==========================================================
    RESPONSIVE
 ========================================================== */
 
@@ -257,5 +257,171 @@
 
     .cart-summary {
         padding: 22px;
+    }
+}
+
+
+/* ==========================================================
+   PHASE 6B โ€” HERO V2 + FOOTER V2 RESPONSIVE
+   Desktop layout remains unchanged
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .hero-v2-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .hero-v2-ad img {
+        max-width: 340px;
+    }
+
+    .footer-v2-main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer-v2-gift-image img {
+        min-height: 180px;
+    }
+
+    .footer-v2-gift,
+    .footer-v2-service {
+        min-height: 180px;
+        border-bottom: 1px solid #eadfce;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .hero-v2 {
+        min-height: auto;
+    }
+
+    .hero-v2-layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 32px;
+        padding-bottom: 32px;
+        text-align: center;
+    }
+
+    .hero-v2-content {
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    .hero-v2-ad {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-v2-ad img {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .footer-v2-main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-v2-gift-image img {
+        min-height: 170px;
+    }
+
+    .footer-v2-gift,
+    .footer-v2-service {
+        min-height: 170px;
+    }
+
+    .footer-v2-bottom {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        text-align: center;
+    }
+
+    .footer-v2-social,
+    .footer-v2-links {
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .hero-v2-layout {
+        padding-top: 26px;
+        padding-bottom: 26px;
+    }
+
+    .hero-v2-ad img {
+        max-width: 300px;
+    }
+
+    .footer-v2-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-v2-gift-image img {
+        height: 220px;
+        min-height: 0;
+    }
+
+    .footer-v2-gift,
+    .footer-v2-service {
+        min-height: 120px;
+        padding: 20px 16px;
+        border-right: 0;
+        border-bottom: 1px solid #eadfce;
+    }
+
+    .footer-v2-social,
+    .footer-v2-links {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* ==========================================================
+   PHASE 6C — MOBILE CATEGORY + BEST SELLER
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .category-card {
+        width: 100%;
+    }
+
+    .bestseller-section:not(.featured-products-section) .product-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .bestseller-section:not(.featured-products-section) .product-img-wrap {
+        height: 300px;
+    }
+
+    .bestseller-section:not(.featured-products-section) .product-info {
+        padding: 16px;
+    }
+
+    .bestseller-section:not(.featured-products-section) .product-info h3.product-name {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    .bestseller-section:not(.featured-products-section) .product-description {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
     }
 }

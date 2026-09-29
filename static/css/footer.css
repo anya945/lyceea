@@ -1,4 +1,4 @@
-﻿/* ==========================================================
+/* ==========================================================
    FOOTER
 ========================================================== */
 
@@ -172,4 +172,139 @@
     margin: 0;
     color: #eadfce;
     font-size: 13px;
+}
+
+/* ==========================================================
+   FOOTER V2 — REFERENCE LAYOUT
+   ========================================================== */
+
+.footer-v2 {
+    background: #fffdf9;
+    color: #6a4b3a;
+    border-top: 1px solid #eadfce;
+}
+
+.footer-v2-main {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr repeat(4, 1fr);
+    min-height: 150px;
+    align-items: stretch;
+}
+
+.footer-v2-gift-image {
+    overflow: hidden;
+}
+
+.footer-v2-gift-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 150px;
+    object-fit: cover;
+}
+
+.footer-v2-gift,
+.footer-v2-service {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 18px;
+    text-align: center;
+    border-right: 1px solid #eadfce;
+}
+
+.footer-v2-gift {
+    background: #f5ede4;
+}
+
+.footer-v2-gift span {
+    color: #c89a5b;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
+.footer-v2-gift h4 {
+    color: #6a4b3a;
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 0 0 10px;
+}
+
+.footer-v2-gift-btn {
+    display: inline-block;
+    align-self: center;
+    padding: 7px 13px;
+    background: #6a4b3a;
+    color: #fff;
+    font-size: 11px;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.footer-v2-gift-btn:hover {
+    background: #c89a5b;
+    color: #fff;
+}
+
+.footer-v2-service:last-child {
+    border-right: 0;
+}
+
+.footer-v2-icon {
+    color: #6a4b3a;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 9px;
+}
+
+.footer-v2-service h5 {
+    color: #6a4b3a;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.footer-v2-service p {
+    color: #8a7162;
+    font-size: 10px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.footer-v2-bottom {
+    min-height: 42px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    border-top: 1px solid #eadfce;
+    font-size: 10px;
+}
+
+.footer-v2-bottom p {
+    margin: 0;
+    color: #8a7162;
+    text-align: center;
+}
+
+.footer-v2-social {
+    display: flex;
+    gap: 14px;
+    color: #8a7162;
+}
+
+.footer-v2-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.footer-v2-links a {
+    color: #8a7162;
+    text-decoration: none;
+}
+
+.footer-v2-links a:hover {
+    color: #c89a5b;
 }

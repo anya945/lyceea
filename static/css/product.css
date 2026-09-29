@@ -1,4 +1,4 @@
-﻿/* ==========================================================
+/* ==========================================================
    PRODUCT CARD
 ========================================================== */
 
@@ -309,7 +309,7 @@
 
 
 /* ==========================================================
-   PRODUCT CARD — COMPACT V1
+   PRODUCT CARD โ€” COMPACT V1
    ========================================================== */
 
 .bestseller-section .product-grid,
@@ -385,3 +385,73 @@
     height: 16px;
 }
 
+
+/* ===== PHASE 4 BEST SELLER REFERENCE LAYOUT ===== */
+
+.bestseller-section:not(.featured-products-section) {
+    padding: 48px 0;
+}
+
+.bestseller-section:not(.featured-products-section) .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    justify-content: stretch;
+}
+
+.bestseller-section:not(.featured-products-section) .luxury-product-card {
+    width: 100%;
+    height: auto;
+}
+
+.bestseller-section:not(.featured-products-section) .product-img-wrap {
+    height: 260px;
+}
+
+.bestseller-section:not(.featured-products-section) .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bestseller-section:not(.featured-products-section) .product-info {
+    padding: 16px;
+}
+
+/* ===== PHASE 4H BEST SELLER THREE INFO ROWS ===== */
+
+.bestseller-section:not(.featured-products-section) .product-category {
+    display: none;
+}
+
+.bestseller-section:not(.featured-products-section) .product-info h3.product-name {
+    min-height: 0;
+    margin: 0 0 4px;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.bestseller-section:not(.featured-products-section) .product-description {
+    min-height: 0;
+    margin: 0 0 5px;
+    font-size: 12px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bestseller-section:not(.featured-products-section) .product-price {
+    min-height: 0;
+    margin: 0 0 10px;
+}
+
+/* ===== PHASE 4I BEST SELLER NAME ONE LINE ===== */
+.bestseller-section:not(.featured-products-section) .product-info h3.product-name {
+    display: block;
+    min-height: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

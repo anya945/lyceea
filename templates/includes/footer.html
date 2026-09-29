@@ -1,100 +1,64 @@
-<footer class="footer-luxury">
-    <div class="container footer-grid">
+{% load static %}
 
-        <div class="footer-brand">
-            <h3>Lyceea</h3>
-            <span>BOTANICAL CANDLE</span>
+<footer class="footer-v2">
 
-            <p>
-                เทียนหอมแฮนด์เมดที่ออกแบบมาเพื่อเติมเต็ม
-                ความสงบ ความอบอุ่น และบรรยากาศที่มีความหมาย
-                ให้กับทุกช่วงเวลาภายในบ้าน
-            </p>
+    <div class="container footer-v2-main">
+
+        <div class="footer-v2-gift-image">
+            <img src="{% static 'images/categories/category_gift.jpg' %}"
+                 alt="Lyceea Gift Service">
         </div>
 
-        <div class="footer-links">
-            <h5>เมนู</h5>
-
-            <a href="{% url 'products:home' %}">
-                หน้าแรก
-            </a>
-
-            <a href="{% url 'products:product_list' %}">
-                สินค้า
-            </a>
-
-            <a href="{% url 'pages:about' %}">
-                เกี่ยวกับเรา
-            </a>
-
-            <a href="{% url 'pages:reviews' %}">
-                รีวิว
-            </a>
-
-            <a href="{% url 'pages:blog_list' %}">
-                บทความ
+        <div class="footer-v2-gift">
+            <span>SPECIAL FOR YOU</span>
+            <h4>บริการห่อของขวัญฟรี!</h4>
+            <a href="{% url 'pages:contact' %}" class="footer-v2-gift-btn">
+                ดูรายละเอียด →
             </a>
         </div>
 
-        <div class="footer-links">
-            <h5>ข้อมูลลูกค้า</h5>
-
-            <a href="{% url 'pages:faq' %}">
-                วิธีสั่งซื้อและคำถามที่พบบ่อย
-            </a>
-
-            <a href="{% url 'pages:shipping_policy' %}">
-                นโยบายการจัดส่ง
-            </a>
-
-            <a href="{% url 'pages:return_policy' %}">
-                นโยบายการคืนสินค้า
-            </a>
-
-            <a href="{% url 'pages:privacy_policy' %}">
-                นโยบายความเป็นส่วนตัว
-            </a>
-
-            <a href="{% url 'pages:terms' %}">
-                ข้อกำหนดและเงื่อนไข
-            </a>
+        <div class="footer-v2-service">
+            <div class="footer-v2-icon" aria-hidden="true">♧</div>
+            <h5>จัดส่งทั่วไทย</h5>
+            <p>จัดส่งฟรีเมื่อครบ 1,000 บาท</p>
         </div>
 
-        <div class="footer-contact">
-            <h5>ติดต่อเรา</h5>
+        <div class="footer-v2-service">
+            <div class="footer-v2-icon" aria-hidden="true">◇</div>
+            <h5>แพ็กสินค้าอย่างดี</h5>
+            <p>ใส่ใจและปลอดภัยทุกการจัดส่ง</p>
+        </div>
 
-            <p>
-                โทร:
-                <a href="tel:0628282895">
-                    062-828-2895
-                </a>
-            </p>
+        <div class="footer-v2-service">
+            <div class="footer-v2-icon" aria-hidden="true">◷</div>
+            <h5>เวลาทำการ</h5>
+            <p>ทุกวัน 9:00 - 20:00</p>
+        </div>
 
-            <p>
-                Email:
-                <a href="mailto:hello@lyceea.com">
-                    hello@lyceea.com
-                </a>
-            </p>
-
-            <p>
-                Line: @lyceea.cozy
-            </p>
-
-            <p>
-                Bangkok, Thailand
-            </p>
-
-            <a href="{% url 'pages:contact' %}">
-                ดูข้อมูลติดต่อทั้งหมด
-            </a>
+        <div class="footer-v2-service">
+            <div class="footer-v2-icon" aria-hidden="true">◎</div>
+            <h5>สอบถาม / สั่งซื้อ</h5>
+            <p>LINE: @lyceea.cozy</p>
         </div>
 
     </div>
 
-    <div class="footer-bottom">
-        <p>
-            © 2026 Lyceea. All Rights Reserved.
-        </p>
+    <div class="container footer-v2-bottom">
+
+        <div class="footer-v2-social">
+            <span>Facebook</span>
+            <span>Instagram</span>
+            <span>TikTok</span>
+        </div>
+
+        <p>© 2026 LYCEEA. ALL RIGHTS RESERVED.</p>
+
+        <div class="footer-v2-links">
+            <a href="{% url 'pages:privacy_policy' %}">Privacy</a>
+            <a href="{% url 'pages:terms' %}">Terms</a>
+            <a href="{% url 'pages:contact' %}">Contact</a>
+        </div>
+
     </div>
+
 </footer>
